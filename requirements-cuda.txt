@@ -1,0 +1,15 @@
+--index-url https://download.pytorch.org/whl/cu128
+--extra-index-url https://pypi.org/simple
+
+# CUDA-enabled training stack (Python 3.13 / Linux x86_64)
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+
+# Notebook execution, plotting, progress reporting, and evaluation
+jupyterlab>=4.5,<5
+ipykernel>=7.2,<8
+nbformat>=5.10,<6
+nbconvert>=7.17,<8
+matplotlib>=3.10,<4
+tqdm>=4.67,<5
+scikit-learn>=1.8,<2
