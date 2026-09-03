@@ -1,0 +1,56 @@
+{
+  "all_conv_and_fc_ternary": true,
+  "architecture": "ResNet18-CIFAR-ternary",
+  "best_checkpoint": "/home/vu-lab03-pc17/ATDL-1/results/best_models/task3_screen_b2_ttq_s42_best.pth",
+  "best_seed": 42,
+  "condition": "B2-TTQ",
+  "epochs": 10,
+  "note": "Validation-only QAT result. No test-loader import or test evaluation occurred.",
+  "per_seed": [
+    {
+      "all_ternary": true,
+      "best_epoch": 10,
+      "best_validation_accuracy": 0.9412,
+      "checkpoint": "/home/vu-lab03-pc17/ATDL-1/experiments/checkpoints/task3_screen_b2_ttq_s42/resnet18_ternary_seed42.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "checkpoint_reload_validation_accuracy": 0.9412,
+      "elapsed_seconds": 137.71635283500018,
+      "final_augmented_train_accuracy": 0.9967777777777778,
+      "final_validation_accuracy": 0.9412,
+      "history": "/home/vu-lab03-pc17/ATDL-1/experiments/histories/task3_screen_b2_ttq_s42/resnet18_ternary_seed42.json",
+      "plots": [
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_screen_b2_ttq_s42/resnet18_ternary_seed42_loss.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_screen_b2_ttq_s42/resnet18_ternary_seed42_acc.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_screen_b2_ttq_s42/resnet18_ternary_seed42_gap.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_screen_b2_ttq_s42/resnet18_ternary_seed42_lr.png"
+      ],
+      "quant_error_mean": 0.642580641766538,
+      "seconds_per_epoch": 13.771635283500018,
+      "seed": 42,
+      "sparsity": 0.014573170032618104
+    }
+  ],
+  "quant_config": {
+    "clip": 1.0,
+    "scale": "learned",
+    "scope": "per_channel",
+    "ste": "clipped",
+    "symmetric": false,
+    "t": 0.05,
+    "threshold": "ttq",
+    "twn_factor": 0.7
+  },
+  "run_name": "task3_screen_b2_ttq_s42",
+  "sparsity_mean": 0.014573170032618104,
+  "task": "T3",
+  "test_evaluation": "not_run",
+  "test_mean": null,
+  "test_std": null,
+  "training_seeds": [
+    42
+  ],
+  "validation_best": 0.9412,
+  "validation_mean": 0.9412,
+  "validation_std": 0.0,
+  "warm_start": "results/best_models/task2_b1_fp32_resnet18_best.pth"
+}

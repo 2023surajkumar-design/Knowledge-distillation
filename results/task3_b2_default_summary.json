@@ -1,0 +1,102 @@
+{
+  "all_conv_and_fc_ternary": true,
+  "architecture": "ResNet18-CIFAR-ternary",
+  "best_checkpoint": "/home/vu-lab03-pc17/ATDL-1/results/best_models/task3_b2_default_best.pth",
+  "best_seed": 44,
+  "condition": "B2-default",
+  "epochs": 200,
+  "note": "Validation-only QAT result. No test-loader import or test evaluation occurred.",
+  "per_seed": [
+    {
+      "all_ternary": true,
+      "best_epoch": 195,
+      "best_validation_accuracy": 0.9512,
+      "checkpoint": "/home/vu-lab03-pc17/ATDL-1/experiments/checkpoints/task3_b2_default/resnet18_ternary_seed42.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "checkpoint_reload_validation_accuracy": 0.9512,
+      "elapsed_seconds": 2213.154796351,
+      "final_augmented_train_accuracy": 1.0,
+      "final_validation_accuracy": 0.9494,
+      "history": "/home/vu-lab03-pc17/ATDL-1/experiments/histories/task3_b2_default/resnet18_ternary_seed42.json",
+      "plots": [
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed42_loss.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed42_acc.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed42_gap.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed42_lr.png"
+      ],
+      "quant_error_mean": 0.5589017968683466,
+      "seconds_per_epoch": 11.065773981755001,
+      "seed": 42,
+      "sparsity": 0.47181618780919843
+    },
+    {
+      "all_ternary": true,
+      "best_epoch": 159,
+      "best_validation_accuracy": 0.9522,
+      "checkpoint": "/home/vu-lab03-pc17/ATDL-1/experiments/checkpoints/task3_b2_default/resnet18_ternary_seed43.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "checkpoint_reload_validation_accuracy": 0.9522,
+      "elapsed_seconds": 2219.1732593829993,
+      "final_augmented_train_accuracy": 1.0,
+      "final_validation_accuracy": 0.95,
+      "history": "/home/vu-lab03-pc17/ATDL-1/experiments/histories/task3_b2_default/resnet18_ternary_seed43.json",
+      "plots": [
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed43_loss.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed43_acc.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed43_gap.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed43_lr.png"
+      ],
+      "quant_error_mean": 0.5587816564763824,
+      "seconds_per_epoch": 11.095866296914997,
+      "seed": 43,
+      "sparsity": 0.4712958710008427
+    },
+    {
+      "all_ternary": true,
+      "best_epoch": 171,
+      "best_validation_accuracy": 0.9528,
+      "checkpoint": "/home/vu-lab03-pc17/ATDL-1/experiments/checkpoints/task3_b2_default/resnet18_ternary_seed44.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "checkpoint_reload_validation_accuracy": 0.9528,
+      "elapsed_seconds": 2224.618315167001,
+      "final_augmented_train_accuracy": 1.0,
+      "final_validation_accuracy": 0.952,
+      "history": "/home/vu-lab03-pc17/ATDL-1/experiments/histories/task3_b2_default/resnet18_ternary_seed44.json",
+      "plots": [
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed44_loss.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed44_acc.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed44_gap.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task3/task3_b2_default/resnet18_ternary_seed44_lr.png"
+      ],
+      "quant_error_mean": 0.5589083815396846,
+      "seconds_per_epoch": 11.123091575835005,
+      "seed": 44,
+      "sparsity": 0.4711684117448106
+    }
+  ],
+  "quant_config": {
+    "clip": 1.0,
+    "scale": "derived",
+    "scope": "per_channel",
+    "ste": "clipped",
+    "symmetric": true,
+    "t": 0.05,
+    "threshold": "twn",
+    "twn_factor": 0.7
+  },
+  "run_name": "task3_b2_default",
+  "sparsity_mean": 0.4714268235182839,
+  "task": "T3",
+  "test_evaluation": "not_run",
+  "test_mean": null,
+  "test_std": null,
+  "training_seeds": [
+    42,
+    43,
+    44
+  ],
+  "validation_best": 0.9528,
+  "validation_mean": 0.9520666666666666,
+  "validation_std": 0.0008082903768654466,
+  "warm_start": "results/best_models/task2_b1_fp32_resnet18_best.pth"
+}

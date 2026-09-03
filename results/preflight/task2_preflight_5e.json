@@ -1,0 +1,60 @@
+{
+  "architecture": "ResNet18-CIFAR",
+  "augmentation": [
+    "RandomCrop(32,padding=4)",
+    "RandomHorizontalFlip"
+  ],
+  "base_lr": 0.1,
+  "batch_size": 128,
+  "best_checkpoint": "results/best_models/task2_preflight_5e_best.pth",
+  "best_seed": 42,
+  "condition": "B1_FP32_ResNet18",
+  "dataset": "CIFAR-10",
+  "effective_lr": 0.1,
+  "epochs": 5,
+  "label_smoothing": 0.1,
+  "momentum": 0.9,
+  "nesterov": true,
+  "note": "Validation-only summary. The augmented-training-minus-validation metric is a diagnostic, not a clean generalization gap.",
+  "optimizer": "SGD",
+  "parameters": 11173962,
+  "per_seed": [
+    {
+      "best_epoch": 5,
+      "best_validation_accuracy": 0.788,
+      "checkpoint": "experiments/checkpoints/task2_preflight_5e/resnet18_fp32_seed42.pth",
+      "elapsed_seconds": 49.54284182399988,
+      "final_augmented_train_accuracy": 0.7944222222222223,
+      "final_validation_accuracy": 0.788,
+      "history": "experiments/histories/task2_preflight_5e/resnet18_fp32_seed42.json",
+      "n_train": 45000,
+      "peak_gpu_memory_bytes": 2380260352,
+      "plots": [
+        "plots/task2_preflight_5e/resnet18_fp32_seed42_loss.png",
+        "plots/task2_preflight_5e/resnet18_fp32_seed42_acc.png",
+        "plots/task2_preflight_5e/resnet18_fp32_seed42_gap.png",
+        "plots/task2_preflight_5e/resnet18_fp32_seed42_lr.png"
+      ],
+      "seconds_per_epoch": 9.908568364799976,
+      "seed": 42
+    }
+  ],
+  "run_name": "task2_preflight_5e",
+  "scheduler": "warmup+cosine",
+  "task": "T2",
+  "test_evaluation": "not_run",
+  "test_mean": null,
+  "test_samples": 10000,
+  "test_std": null,
+  "train_samples": 45000,
+  "training_seeds": [
+    42
+  ],
+  "validation_best": 0.788,
+  "validation_mean": 0.788,
+  "validation_per_class": 500,
+  "validation_samples": 5000,
+  "validation_std": 0.0,
+  "warmup_epochs": 5,
+  "weight_decay": 0.0005
+}

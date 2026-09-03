@@ -1,0 +1,25 @@
+# Task 2 / B1 control condition. CLI flags may override only for an explicitly
+# named preflight run; the 200-epoch baseline must preserve these values.
+task: T2_fp32_resnet18_baseline
+arch: ResNet18-CIFAR
+num_classes: 10
+dataset: CIFAR-10
+data_root: ./data
+split: task1_classwise_torch_generator_v1_seed42
+batch_size: 128
+num_workers: 4
+epochs: 200
+lr: 0.1
+scale_lr_with_batch: true
+optimizer: SGD
+momentum: 0.9
+nesterov: true
+weight_decay: 0.0005
+warmup_epochs: 5
+scheduler: warmup+cosine
+label_smoothing: 0.1
+seeds: [42, 43, 44]
+strict_determinism: false
+allow_tf32: false
+kd: false
+quantization: none

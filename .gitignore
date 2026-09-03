@@ -1,3 +1,8 @@
 # Local datasets and model checkpoints
 data/cifar-10-python.tar.gz
 *.pth
+
+# Derived Python/runtime caches
+__pycache__/
+*.py[cod]
+.pytest_cache/

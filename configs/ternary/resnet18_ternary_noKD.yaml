@@ -1,0 +1,30 @@
+# Immutable Task 3 B2-default: all ResNet18 conv/FC weights are ternary in every forward pass.
+task: T3_ternary_resnet18_baseline_noKD
+condition: B2-default
+run_name: task3_b2_default
+arch: ResNet18-CIFAR-ternary
+num_classes: 10
+data_root: ./data
+batch_size: 128
+num_workers: 4
+epochs: 200
+lr: 0.1
+momentum: 0.9
+nesterov: true
+weight_decay: 0.0001
+warmup_epochs: 5
+label_smoothing: 0.1
+seeds: [42, 43, 44]
+strict_determinism: false
+kd_mode: none
+keep_first_last_fp32: false
+warm_start: results/best_models/task2_b1_fp32_resnet18_best.pth
+quant:
+  threshold: twn
+  scale: derived
+  symmetric: true
+  scope: per_channel
+  t: 0.05
+  twn_factor: 0.7
+  ste: clipped
+  clip: 1.0

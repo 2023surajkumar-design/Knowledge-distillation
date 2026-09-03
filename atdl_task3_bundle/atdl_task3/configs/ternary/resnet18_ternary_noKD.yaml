@@ -1,0 +1,36 @@
+# Task 3 — ternary ResNet18 QAT baseline (B2), no KD.
+task: T3_ternary_resnet18_baseline_noKD
+arch: ResNet18-CIFAR-ternary
+num_classes: 10
+
+# quantizer (default = per-channel symmetric TWN, derived alpha, clipped STE)
+quant:
+  threshold: twn          # twn (0.7*mean|W|) | ttq (t*max|W|)
+  scale: derived          # derived (TWN optimal) | learned (TTQ param)
+  symmetric: true         # {-a,0,+a}; set false for {-a_n,0,+a_p} (requires scale: learned)
+  scope: per_channel      # per_channel | per_tensor
+  t: 0.05                 # TTQ threshold factor (used only if threshold: ttq)
+  ste: clipped            # clipped (Yin et al.) | identity (Bengio)
+  clip: 1.0
+keep_first_last_fp32: false   # DIAGNOSTIC ONLY; must be false for the compliant baseline (C14)
+
+# optimization (QAT: lower weight decay than FP32; ternary already regularizes)
+epochs: 200
+batch_size: 128
+lr: 0.1
+optimizer: SGD
+momentum: 0.9
+nesterov: true
+weight_decay: 0.0001        # applied to latent conv/linear weights only
+warmup_epochs: 5
+scheduler: warmup+cosine
+label_smoothing: 0.1
+
+# warm-start latent weights from the Task 2 FP32 student (TTQ practice)
+warm_start: results/best_models/resnet18_fp32_best.pth
+
+seeds: [42, 43, 44]
+strict_determinism: false
+
+# scope guard
+kd_mode: none               # KD is Task 4 — must be 'none' here

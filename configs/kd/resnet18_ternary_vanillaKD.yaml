@@ -1,0 +1,32 @@
+# Task 4 canonical vanilla logit-KD + the frozen Task 3 QAT configuration.
+task: T4_ternary_resnet18_vanilla_kd
+condition: B3-vanillaKD-canonical
+run_name: task4_b3_canonical_t4_lam05
+data_root: ./data
+batch_size: 128
+num_workers: 4
+epochs: 200
+lr: 0.1
+momentum: 0.9
+nesterov: true
+weight_decay: 0.0001
+warmup_epochs: 5
+label_smoothing: 0.1
+seeds: [42, 43, 44]
+strict_determinism: false
+teacher_checkpoint: resnet34_cifar10_fp32_best.pth
+teacher_tag: task1_ls01
+temperature: 4.0
+kd_lambda: 0.5
+warm_start: results/best_models/task2_b1_fp32_resnet18_best.pth
+keep_first_last_fp32: false
+gradient_diagnostics: true
+quant:
+  threshold: twn
+  scale: derived
+  symmetric: true
+  scope: per_channel
+  t: 0.05
+  twn_factor: 0.7
+  ste: clipped
+  clip: 1.0

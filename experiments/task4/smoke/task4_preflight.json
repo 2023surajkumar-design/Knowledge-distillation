@@ -1,0 +1,35 @@
+{
+  "real_batch": {
+    "all_conv_and_fc_ternary": true,
+    "batch_size": 16,
+    "loss_ce": 0.7403156757354736,
+    "loss_kd": 0.313245952129364,
+    "loss_total": 0.5267808437347412,
+    "sparsity": 0.45450349469454204,
+    "student_received_gradients": true,
+    "teacher": {
+      "arch": "ResNet34-CIFAR",
+      "best_validation_accuracy": 0.9554,
+      "device": "cuda",
+      "mode": "eval",
+      "parameter_count": 21282122,
+      "path": "/home/vu-lab03-pc17/ATDL-1/resnet34_cifar10_fp32_best.pth",
+      "requires_grad_any": false,
+      "selection_metric": null,
+      "sha256": "ed19ff5fa0870ea3979377e869a0da508ebe03a78456d528eb2810b972badef6"
+    },
+    "teacher_frozen_and_grad_free": true,
+    "ternary_layer_count": 21,
+    "test_evaluation": "not_run"
+  },
+  "task": "T4",
+  "test_loader_imported": false,
+  "unit_tests": {
+    "forward_and_reverse_kl_not_conflated": true,
+    "identical_logits_have_zero_kd": true,
+    "lambda_one_is_kd": true,
+    "lambda_zero_is_ce": true,
+    "manual_direction_matches": true,
+    "t_squared_applied": true
+  }
+}

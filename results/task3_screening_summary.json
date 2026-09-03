@@ -1,0 +1,18 @@
+{
+  "purpose": "Task 3 controlled short-screening; validation only; no test access",
+  "seed": 42,
+  "epochs": 10,
+  "selection": {
+    "selected_final_condition": "B2-default",
+    "reason": "The canonical default attained the best screening validation accuracy. Per-tensor was 0.02 percentage points lower (one validation example) and adds no demonstrated benefit; no alternative has multi-seed evidence for replacement."
+  },
+  "results": [
+    {"condition": "B2-default", "run_name": "task3_screen_b2_default_s42", "best_validation_accuracy": 0.9466, "best_epoch": 10, "sparsity": 0.4558860201, "mean_layer_quantization_error": 0.5182637144, "elapsed_seconds": 110.993787582},
+    {"condition": "B2-random-init", "run_name": "task3_screen_b2_random_init_s42", "best_validation_accuracy": 0.7348, "best_epoch": 10, "sparsity": 0.4235645741, "mean_layer_quantization_error": 0.4374649890, "elapsed_seconds": 114.008380507},
+    {"condition": "B2-identity-STE", "run_name": "task3_screen_b2_identity_ste_s42", "best_validation_accuracy": 0.9448, "best_epoch": 10, "sparsity": 0.4558710618, "mean_layer_quantization_error": 0.5188105037, "elapsed_seconds": 135.244608828},
+    {"condition": "B2-per-tensor", "run_name": "task3_screen_b2_per_tensor_s42", "best_validation_accuracy": 0.9464, "best_epoch": 10, "sparsity": 0.4825711336, "mean_layer_quantization_error": 0.5527781338, "elapsed_seconds": 137.899819135},
+    {"condition": "B2-learned-symmetric-scale", "run_name": "task3_screen_b2_learned_symmetric_s42", "best_validation_accuracy": 0.9378, "best_epoch": 10, "sparsity": 0.0561993208, "mean_layer_quantization_error": 0.4531504271, "elapsed_seconds": 123.983068307},
+    {"condition": "B2-TTQ", "run_name": "task3_screen_b2_ttq_s42", "best_validation_accuracy": 0.9412, "best_epoch": 10, "sparsity": 0.0145731700, "mean_layer_quantization_error": 0.6425806418, "elapsed_seconds": 137.716352835}
+  ],
+  "test_evaluation": "not_run"
+}

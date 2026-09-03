@@ -1,0 +1,119 @@
+{
+  "best_epoch": 5,
+  "best_validation_accuracy": 0.788,
+  "config": {
+    "allow_tf32": false,
+    "arch": "ResNet18-CIFAR",
+    "base_lr": 0.1,
+    "batch_size": 128,
+    "config_source": "configs/student/resnet18_fp32.yaml",
+    "dataset": "CIFAR-10",
+    "effective_lr": 0.1,
+    "epochs": 5,
+    "label_smoothing": 0.1,
+    "momentum": 0.9,
+    "nesterov": true,
+    "normalization": {
+      "mean": [
+        0.4914,
+        0.4822,
+        0.4465
+      ],
+      "std": [
+        0.247,
+        0.2435,
+        0.2616
+      ]
+    },
+    "num_classes": 10,
+    "num_workers": 4,
+    "run_kind": "preflight",
+    "run_name": "task2_preflight_5e",
+    "runtime": {
+      "allow_tf32": false,
+      "cuda_runtime": "12.8",
+      "device": "cuda",
+      "gpu_compute_capability": "8.9",
+      "gpu_name": "NVIDIA GeForce RTX 4080 SUPER",
+      "gpu_vram_bytes": 16711352320,
+      "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.39",
+      "python": "3.13.9",
+      "torch": "2.11.0+cu128"
+    },
+    "scale_lr_with_batch": true,
+    "scheduler": "warmup+cosine",
+    "seed": 42,
+    "split_manifest": {
+      "dataset": "CIFAR-10",
+      "split_algorithm": "task1_classwise_torch_generator_v1",
+      "split_seed": 42,
+      "train_index_sha256": "c56f6a25318c9c65f072faff8490724c9054950f5af0d967daa4160b93ffd029",
+      "train_samples": 45000,
+      "validation_index_sha256": "ffce04072b4dc04be36f12a4782477053bc3d8d9a60908013318934dbea9568c",
+      "validation_per_class": {
+        "0": 500,
+        "1": 500,
+        "2": 500,
+        "3": 500,
+        "4": 500,
+        "5": 500,
+        "6": 500,
+        "7": 500,
+        "8": 500,
+        "9": 500
+      },
+      "validation_samples": 5000
+    },
+    "strict_determinism": false,
+    "task": "T2_fp32_resnet18_baseline",
+    "warmup_epochs": 5,
+    "weight_decay": 0.0005
+  },
+  "elapsed_seconds": 49.54284182399988,
+  "history": {
+    "gap": [
+      -0.11308888888888885,
+      0.00364444444444445,
+      -0.0004666666666667263,
+      0.04617777777777776,
+      0.006422222222222218
+    ],
+    "lr": [
+      0.020000000000000004,
+      0.04000000000000001,
+      0.06,
+      0.08000000000000002,
+      0.1
+    ],
+    "train_acc": [
+      0.4315111111111111,
+      0.6126444444444444,
+      0.7111333333333333,
+      0.7625777777777778,
+      0.7944222222222223
+    ],
+    "train_loss": [
+      1.709288463613722,
+      1.368320577261183,
+      1.1584107922448053,
+      1.0475637654622396,
+      0.9826332784440782
+    ],
+    "val_acc": [
+      0.5446,
+      0.609,
+      0.7116,
+      0.7164,
+      0.788
+    ],
+    "val_loss": [
+      1.555646455001831,
+      1.4198330591201782,
+      1.1765619155883789,
+      1.1634310249328614,
+      0.9977624313354492
+    ]
+  },
+  "peak_gpu_memory_bytes": 2380260352,
+  "seconds_per_epoch": 9.908568364799976
+}

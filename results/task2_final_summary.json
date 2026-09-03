@@ -1,0 +1,106 @@
+{
+  "architecture": "ResNet18-CIFAR",
+  "augmentation": [
+    "RandomCrop(32,padding=4)",
+    "RandomHorizontalFlip"
+  ],
+  "base_lr": 0.1,
+  "batch_size": 128,
+  "best_checkpoint": "results/best_models/task2_b1_fp32_resnet18_best.pth",
+  "best_seed": 43,
+  "condition": "B1_FP32_ResNet18",
+  "dataset": "CIFAR-10",
+  "effective_lr": 0.1,
+  "epochs": 200,
+  "label_smoothing": 0.1,
+  "momentum": 0.9,
+  "nesterov": true,
+  "note": "Validation-only summary. The augmented-training-minus-validation metric is a diagnostic, not a clean generalization gap.",
+  "optimizer": "SGD",
+  "parameters": 11173962,
+  "per_seed": [
+    {
+      "best_epoch": 195,
+      "best_validation_accuracy": 0.9534,
+      "checkpoint": "experiments/checkpoints/task2_b1_fp32_resnet18/resnet18_fp32_seed42.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "checkpoint_reload_validation_accuracy": 0.9534,
+      "elapsed_seconds": 1734.2971240529996,
+      "final_augmented_train_accuracy": 1.0,
+      "final_validation_accuracy": 0.9514,
+      "history": "experiments/histories/task2_b1_fp32_resnet18/resnet18_fp32_seed42.json",
+      "n_train": 45000,
+      "peak_gpu_memory_bytes": 2380260352,
+      "plots": [
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed42_loss.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed42_acc.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed42_gap.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed42_lr.png"
+      ],
+      "seconds_per_epoch": 8.671485620264997,
+      "seed": 42
+    },
+    {
+      "best_epoch": 180,
+      "best_validation_accuracy": 0.9548,
+      "checkpoint": "experiments/checkpoints/task2_b1_fp32_resnet18/resnet18_fp32_seed43.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "checkpoint_reload_validation_accuracy": 0.9548,
+      "elapsed_seconds": 1709.7998960559999,
+      "final_augmented_train_accuracy": 1.0,
+      "final_validation_accuracy": 0.9536,
+      "history": "experiments/histories/task2_b1_fp32_resnet18/resnet18_fp32_seed43.json",
+      "n_train": 45000,
+      "peak_gpu_memory_bytes": 731645952,
+      "plots": [
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed43_loss.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed43_acc.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed43_gap.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed43_lr.png"
+      ],
+      "seconds_per_epoch": 8.54899948028,
+      "seed": 43
+    },
+    {
+      "best_epoch": 179,
+      "best_validation_accuracy": 0.952,
+      "checkpoint": "experiments/checkpoints/task2_b1_fp32_resnet18/resnet18_fp32_seed44.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "checkpoint_reload_validation_accuracy": 0.952,
+      "elapsed_seconds": 1746.1584121659998,
+      "final_augmented_train_accuracy": 0.9999777777777777,
+      "final_validation_accuracy": 0.95,
+      "history": "experiments/histories/task2_b1_fp32_resnet18/resnet18_fp32_seed44.json",
+      "n_train": 45000,
+      "peak_gpu_memory_bytes": 731645952,
+      "plots": [
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed44_loss.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed44_acc.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed44_gap.png",
+        "plots/task2_b1_fp32_resnet18/resnet18_fp32_seed44_lr.png"
+      ],
+      "seconds_per_epoch": 8.73079206083,
+      "seed": 44
+    }
+  ],
+  "run_name": "task2_b1_fp32_resnet18",
+  "scheduler": "warmup+cosine",
+  "task": "T2",
+  "test_evaluation": "not_run",
+  "test_mean": null,
+  "test_samples": 10000,
+  "test_std": null,
+  "train_samples": 45000,
+  "training_seeds": [
+    42,
+    43,
+    44
+  ],
+  "validation_best": 0.9548,
+  "validation_mean": 0.9533999999999999,
+  "validation_per_class": 500,
+  "validation_samples": 5000,
+  "validation_std": 0.0014000000000000123,
+  "warmup_epochs": 5,
+  "weight_decay": 0.0005
+}

@@ -6,7 +6,7 @@ import torch
 
 
 path = Path("resnet34_cifar10_fp32_final.pth")
-checkpoint = torch.load(path, map_location="cpu")
+checkpoint = torch.load(path, map_location="cpu", weights_only=False)
 checkpoint["best_accuracy"] = checkpoint["best_validation_accuracy"]
 checkpoint["selection_metric"] = "validation_accuracy"
 torch.save(checkpoint, path)

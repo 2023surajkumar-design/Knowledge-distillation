@@ -1,0 +1,31 @@
+# Task 2 — FP32 ResNet18 baseline (B1) configuration.
+# Identical recipe to the Task 1 teacher for a controlled capacity comparison.
+task: T2_fp32_resnet18_baseline
+arch: ResNet18-CIFAR          # BasicBlock [2,2,2,2], 3x3 stem, no maxpool
+num_classes: 10
+
+# data / split (frozen in src/data.py — do not change)
+data_root: ./data
+split: stratified 45k/5k (seed 42)
+batch_size: 128
+num_workers: 4
+
+# optimization (same as Task 1)
+epochs: 200
+lr: 0.1                        # base LR for batch size 128 (linearly scaled otherwise)
+scale_lr_with_batch: true
+optimizer: SGD
+momentum: 0.9
+nesterov: true
+weight_decay: 0.0005
+warmup_epochs: 5
+scheduler: warmup+cosine
+label_smoothing: 0.1
+
+# reproducibility
+seeds: [42, 43, 44]           # 3-seed report (mean ± std)
+strict_determinism: false
+
+# scope guard
+kd: false                     # KD is Task 4 — must stay false here
+quantization: none            # ternary QAT is Task 3 — none here
