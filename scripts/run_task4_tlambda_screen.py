@@ -33,8 +33,32 @@ def summary_path(name: str) -> Path:
     return REPO_ROOT / "results" / "task4" / f"{name}_summary.json"
 
 
+def has_partial_evidence(name: str) -> bool:
+    """Detect an interrupted run without deleting its checkpoint evidence."""
+    return any(path.exists() for path in (
+        REPO_ROOT / "experiments" / "task4" / "checkpoints" / name,
+        REPO_ROOT / "experiments" / "task4" / "histories" / name,
+        REPO_ROOT / "experiments" / "task4" / "diagnostics" / name,
+        REPO_ROOT / "results" / "task4" / "best_models" / f"{name}_best.pth",
+    ))
+
+
+def resolved_run_name(stage: str, temperature: float, kd_lambda: float) -> str:
+    """Reuse completed results; otherwise make interrupted attempts append-only."""
+    base = run_name(stage, temperature, kd_lambda)
+    if summary_path(base).exists() or not has_partial_evidence(base):
+        return base
+    attempt = 1
+    while True:
+        candidate = f"{base}_retry{attempt}"
+        if summary_path(candidate).exists() or has_partial_evidence(candidate):
+            attempt += 1
+            continue
+        return candidate
+
+
 def execute(stage: str, temperature: float, kd_lambda: float, epochs: int, seeds: list[int]) -> dict:
-    name = run_name(stage, temperature, kd_lambda)
+    name = resolved_run_name(stage, temperature, kd_lambda)
     summary = summary_path(name)
     log = ROOT / stage / f"{name}.log"
     log.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,24 @@
+{
+  "ranking": [
+    {
+      "epochs": 30,
+      "kd_lambda": 0.0,
+      "log": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/t_lambda/integrity-control/task4_tlambda_integrity-control_t4_l0.log",
+      "run_name": "task4_tlambda_integrity-control_t4_l0",
+      "seeds": [
+        42
+      ],
+      "summary": "/home/vu-lab03-pc17/ATDL-1/results/task4/task4_tlambda_integrity-control_t4_l0_summary.json",
+      "temperature": 4.0,
+      "test_evaluation": "not_run",
+      "validation_best": 0.9498,
+      "validation_mean": 0.9498,
+      "validation_std": 0.0
+    }
+  ],
+  "selection_metric": "validation accuracy only",
+  "selection_note": "KD-off integrity control; expected to match the no-KD objective, not used to select a KD temperature.",
+  "stage": "integrity-control",
+  "task": "T4",
+  "test_evaluation": "not_run"
+}

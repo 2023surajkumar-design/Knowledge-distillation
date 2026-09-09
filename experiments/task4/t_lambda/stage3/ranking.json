@@ -1,0 +1,57 @@
+{
+  "ranking": [
+    {
+      "epochs": 60,
+      "kd_lambda": 0.9,
+      "log": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/t_lambda/stage3/task4_tlambda_stage3_t2_l0p9.log",
+      "run_name": "task4_tlambda_stage3_t2_l0p9",
+      "seeds": [
+        42,
+        43
+      ],
+      "summary": "/home/vu-lab03-pc17/ATDL-1/results/task4/task4_tlambda_stage3_t2_l0p9_summary.json",
+      "temperature": 2.0,
+      "test_evaluation": "not_run",
+      "validation_best": 0.9526,
+      "validation_mean": 0.9521,
+      "validation_std": 0.0007071067811865482
+    },
+    {
+      "epochs": 60,
+      "kd_lambda": 0.9,
+      "log": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/t_lambda/stage3/task4_tlambda_stage3_t4_l0p9.log",
+      "run_name": "task4_tlambda_stage3_t4_l0p9",
+      "seeds": [
+        42,
+        43
+      ],
+      "summary": "/home/vu-lab03-pc17/ATDL-1/results/task4/task4_tlambda_stage3_t4_l0p9_summary.json",
+      "temperature": 4.0,
+      "test_evaluation": "not_run",
+      "validation_best": 0.9518,
+      "validation_mean": 0.9514,
+      "validation_std": 0.0005656854249492542
+    },
+    {
+      "epochs": 60,
+      "kd_lambda": 0.5,
+      "log": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/t_lambda/stage3/task4_tlambda_stage3_t8_l0p5.log",
+      "run_name": "task4_tlambda_stage3_t8_l0p5",
+      "seeds": [
+        42,
+        43
+      ],
+      "summary": "/home/vu-lab03-pc17/ATDL-1/results/task4/task4_tlambda_stage3_t8_l0p5_summary.json",
+      "temperature": 8.0,
+      "test_evaluation": "not_run",
+      "validation_best": 0.9514,
+      "validation_mean": 0.9513,
+      "validation_std": 0.00014142135623729392
+    }
+  ],
+  "selection_metric": "validation accuracy only",
+  "selection_note": "Stage-2 top three receive 60 epochs on two fixed seeds; select by mean validation accuracy.",
+  "stage": "stage3",
+  "task": "T4",
+  "test_evaluation": "not_run"
+}

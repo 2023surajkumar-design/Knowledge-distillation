@@ -1,0 +1,6 @@
+{
+  "experiment_id": "parent", "dataset_version": "frozen-cifar10",
+  "dataset_split_hash": "split-hash", "teacher_checkpoint_hash": "teacher-hash",
+  "student_architecture": "ResNet18-CIFAR", "student_initialization": "task2-warm-start",
+  "qat_baseline": "task3-b2", "quantizer": "twn", "seed_protocol": "seed42"
+}

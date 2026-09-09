@@ -1,0 +1,9 @@
+{
+  "experiment_id": "candidate-contaminated", "parent_control": "parent", "hypothesis_id": "H1",
+  "mechanism": "DKD", "changed_variables": ["kd_objective"],
+  "fixed_variables": ["dataset_version", "dataset_split_hash", "teacher_checkpoint_hash", "student_architecture", "student_initialization", "qat_baseline", "quantizer", "seed_protocol"],
+  "dataset_version": "frozen-cifar10", "dataset_split_hash": "different-split-hash",
+  "teacher_checkpoint_hash": "teacher-hash", "student_architecture": "ResNet18-CIFAR",
+  "student_initialization": "task2-warm-start", "qat_baseline": "task3-b2",
+  "quantizer": "twn", "seed_protocol": "seed42"
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/vu-lab03-pc17/ATDL-1/scripts/train_student_vanilla_kd.py", line 295, in <module>
+    main()
+    ~~~~^^
+  File "/home/vu-lab03-pc17/ATDL-1/scripts/train_student_vanilla_kd.py", line 282, in main
+    paths = output_paths(args.run_name); assert_fresh(paths, list(args.seeds))
+                                         ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vu-lab03-pc17/ATDL-1/scripts/train_student_vanilla_kd.py", line 102, in assert_fresh
+    raise FileExistsError("Refusing to overwrite Task 4 evidence: " + ", ".join(existing))
+FileExistsError: Refusing to overwrite Task 4 evidence: /home/vu-lab03-pc17/ATDL-1/experiments/task4/checkpoints/task4_tlambda_stage1_t4_l0p1/resnet18_ternary_kd_seed42.pth

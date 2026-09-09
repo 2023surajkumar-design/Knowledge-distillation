@@ -1,0 +1,22 @@
+{
+  "required": [
+    "experiment_id", "parent_experiment", "task", "hypothesis", "method",
+    "code_version", "git_sha", "config", "seed", "dataset_version",
+    "teacher_checkpoint", "student_checkpoint", "training_budget",
+    "validation_metrics", "loss_metrics", "kd_metrics", "quantization_metrics",
+    "optimization_metrics", "runtime", "result", "interpretation",
+    "decision", "next_action"
+  ],
+  "notes": {
+    "append_only": true,
+    "test_metrics": "prohibited before the separately authorized sealed final evaluation",
+    "result": "one of pending, completed, failed, inconclusive",
+    "legacy_records": "records without schema_version are immutable Task 1–4 provenance records",
+    "required_for_schema_version_2": [
+      "parent_control", "hypothesis_id", "mechanism", "changed_variables",
+      "fixed_variables", "git_commit", "config_hash", "dataset_split_hash",
+      "teacher_checkpoint_hash", "student_initialization", "decision_colour",
+      "mechanism_evidence", "contamination_status"
+    ]
+  }
+}

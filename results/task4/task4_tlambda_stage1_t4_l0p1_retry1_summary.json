@@ -1,0 +1,85 @@
+{
+  "all_conv_and_fc_ternary": true,
+  "architecture": "ResNet18-CIFAR-ternary",
+  "best_checkpoint": "/home/vu-lab03-pc17/ATDL-1/results/task4/best_models/task4_tlambda_stage1_t4_l0p1_retry1_best.pth",
+  "best_seed": 42,
+  "condition": "t_lambda_stage1",
+  "epochs": 6,
+  "kd_lambda": 0.1,
+  "kd_mode": "vanilla_logit_only",
+  "note": "Validation-only strict ternary QAT plus vanilla logit KD; no test loader is imported.",
+  "per_seed": [
+    {
+      "all_ternary": true,
+      "best_epoch": 6,
+      "best_validation_accuracy": 0.9172,
+      "checkpoint": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/checkpoints/task4_tlambda_stage1_t4_l0p1_retry1/resnet18_ternary_kd_seed42.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "elapsed_seconds": 88.20427525000002,
+      "final_augmented_train_accuracy": 0.9899777777777777,
+      "final_validation_accuracy": 0.9172,
+      "history": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/histories/task4_tlambda_stage1_t4_l0p1_retry1/seed42.json",
+      "plots": [
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task4_tlambda_stage1_t4_l0p1_retry1/seed42_loss.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task4_tlambda_stage1_t4_l0p1_retry1/seed42_acc.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task4_tlambda_stage1_t4_l0p1_retry1/seed42_gap.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task4_tlambda_stage1_t4_l0p1_retry1/seed42_lr.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task4_tlambda_stage1_t4_l0p1_retry1/seed42_contributions.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task4_tlambda_stage1_t4_l0p1_retry1/seed42_gradient.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task4_tlambda_stage1_t4_l0p1_retry1/seed42_gradient_cosine.png"
+      ],
+      "quant_error_mean": 0.5158835841367504,
+      "seconds_per_epoch": 14.70071254166667,
+      "seed": 42,
+      "sparsity": 0.455716552111578,
+      "validation_kd_diagnostics": {
+        "agreement": 0.9244,
+        "ce": 0.7207232870101928,
+        "kd": 0.15973022036552428,
+        "student_confidence": 0.8688078569412232,
+        "student_correct": 0.9172,
+        "student_entropy": 0.6078189964294434,
+        "student_margin": 0.8327759643554687,
+        "teacher_confidence": 0.8974391422271728,
+        "teacher_correct": 0.9554,
+        "teacher_entropy": 0.5315583397865296,
+        "teacher_margin": 0.877153971862793
+      }
+    }
+  ],
+  "quant_config": {
+    "clip": 1.0,
+    "scale": "derived",
+    "scope": "per_channel",
+    "ste": "clipped",
+    "symmetric": true,
+    "t": 0.05,
+    "threshold": "twn",
+    "twn_factor": 0.7
+  },
+  "run_name": "task4_tlambda_stage1_t4_l0p1_retry1",
+  "sparsity_mean": 0.455716552111578,
+  "task": "T4",
+  "teacher": {
+    "arch": "ResNet34-CIFAR",
+    "best_validation_accuracy": 0.9554,
+    "device": "cuda",
+    "mode": "eval",
+    "parameter_count": 21282122,
+    "path": "resnet34_cifar10_fp32_best.pth",
+    "requires_grad_any": false,
+    "selection_metric": null,
+    "sha256": "ed19ff5fa0870ea3979377e869a0da508ebe03a78456d528eb2810b972badef6"
+  },
+  "temperature": 4.0,
+  "test_evaluation": "not_run",
+  "test_mean": null,
+  "test_std": null,
+  "training_seeds": [
+    42
+  ],
+  "validation_best": 0.9172,
+  "validation_mean": 0.9172,
+  "validation_std": 0.0,
+  "warm_start": "results/best_models/task2_b1_fp32_resnet18_best.pth"
+}
