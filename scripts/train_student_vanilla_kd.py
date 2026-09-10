@@ -27,7 +27,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from src.data import CIFAR10_MEAN, CIFAR10_STD, get_train_val_loaders, split_manifest
 from src.evaluation.verify_ternary import build_from_checkpoint, verify_model
-from src.kd.losses import vanilla_kd_loss
+from src.kd.losses import decoupled_kd_loss, vanilla_kd_loss
 from src.kd.teacher import assert_teacher_frozen, load_frozen_teacher
 from src.models.resnet_cifar import resnet18_cifar
 from src.quant.ternary import QuantConfig, TernaryConv2d, TernaryLinear, convert_to_ternary, parameter_group_audit, ternary_parameter_groups
@@ -36,7 +36,8 @@ from src.training.utils import evaluate, get_device, make_warmup_cosine, runtime
 
 def parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Task 4 vanilla logit-KD + strict ternary QAT.")
-    p.add_argument("--kd-mode", choices=["vanilla"], default="vanilla")
+    p.add_argument("--kd-mode", choices=["vanilla", "dkd"], default="vanilla")
+    p.add_argument("--dkd-alpha", type=float); p.add_argument("--dkd-beta", type=float)
     p.add_argument("--config", default="configs/kd/resnet18_ternary_vanillaKD.yaml")
     p.add_argument("--run-name"); p.add_argument("--condition")
     p.add_argument("--epochs", type=int); p.add_argument("--batch-size", type=int); p.add_argument("--num-workers", type=int)
@@ -62,11 +63,12 @@ def parse_args() -> tuple[argparse.Namespace, Path]:
         "momentum": cli.momentum, "warmup_epochs": cli.warmup_epochs, "label_smoothing": cli.label_smoothing,
         "seeds": cli.seeds, "teacher_checkpoint": cli.teacher_checkpoint, "teacher_tag": cli.teacher_tag,
         "temperature": cli.temperature, "kd_lambda": cli.kd_lambda, "warm_start": cli.warm_start,
-        "gradient_diagnostics": cli.gradient_diagnostics,
+        "gradient_diagnostics": cli.gradient_diagnostics, "dkd_alpha": cli.dkd_alpha, "dkd_beta": cli.dkd_beta,
     }
     for key, value in overrides.items():
         if value is not None:
             config[key] = value
+    config["kd_mode"] = cli.kd_mode
     if cli.no_warm_start:
         config["warm_start"] = ""
     config["smoke"] = cli.smoke
@@ -138,7 +140,12 @@ def gradient_diagnostics(ce: torch.Tensor, kd: torch.Tensor, parameters: list[to
     return {"ce_grad_norm": ce_norm, "kd_grad_norm": kd_norm, "grad_cosine": dot / (ce_norm * kd_norm + 1e-12)}
 
 
-def train_epoch(student, teacher, loader, optimizer, device, temperature, kd_lambda, criterion, with_gradient_diagnostics: bool, description: str) -> dict:
+def _distill(mode, student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta):
+    return (decoupled_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta)
+            if mode == "dkd" else vanilla_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion))
+
+
+def train_epoch(student, teacher, loader, optimizer, device, temperature, kd_lambda, criterion, with_gradient_diagnostics: bool, description: str, mode="vanilla", alpha=1., beta=8.) -> dict:
     student.train(); teacher.eval(); assert_teacher_frozen(teacher)
     totals = {key: 0.0 for key in ("total_loss", "ce_loss", "kd_loss", "weighted_ce", "weighted_kd", "correct")}
     gradient_rows = []
@@ -149,7 +156,7 @@ def train_epoch(student, teacher, loader, optimizer, device, temperature, kd_lam
             teacher_logits = teacher(inputs)
         optimizer.zero_grad(set_to_none=True)
         student_logits = student(inputs)
-        losses = vanilla_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion)
+        losses = _distill(mode, student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta)
         if not torch.isfinite(losses.total):
             raise FloatingPointError("Non-finite Task 4 loss.")
         if with_gradient_diagnostics and batch_index == 0:
@@ -174,14 +181,14 @@ def train_epoch(student, teacher, loader, optimizer, device, temperature, kd_lam
 
 
 @torch.no_grad()
-def validation_diagnostics(student, teacher, loader, criterion, device, temperature, kd_lambda) -> dict:
+def validation_diagnostics(student, teacher, loader, criterion, device, temperature, kd_lambda, mode="vanilla", alpha=1., beta=8.) -> dict:
     student.eval(); teacher.eval(); assert_teacher_frozen(teacher)
     sums = {key: 0.0 for key in ("ce", "kd", "teacher_correct", "student_correct", "agreement", "teacher_entropy", "student_entropy", "teacher_confidence", "student_confidence", "teacher_margin", "student_margin")}
     count = 0
     for inputs, labels in loader:
         inputs, labels = inputs.to(device, non_blocking=True), labels.to(device, non_blocking=True)
         teacher_logits, student_logits = teacher(inputs), student(inputs)
-        losses = vanilla_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion)
+        losses = _distill(mode, student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta)
         teacher_prob = torch.softmax(teacher_logits, dim=1); student_prob = torch.softmax(student_logits, dim=1)
         teacher_top2 = teacher_prob.topk(2, dim=1).values; student_top2 = student_prob.topk(2, dim=1).values
         batch_size = labels.size(0); count += batch_size
@@ -235,7 +242,7 @@ def train_one_seed(seed: int, args: argparse.Namespace, cfg: QuantConfig, teache
         "nesterov": args.nesterov, "weight_decay": args.weight_decay, "warmup_epochs": args.warmup_epochs,
         "label_smoothing": args.label_smoothing, "scheduler": "warmup+cosine", "quant_config": cfg.serializable(),
         "teacher": teacher_metadata, "temperature": args.temperature, "kd_lambda": args.kd_lambda,
-        "warm_start": args.warm_start, "keep_first_last_fp32": False, "kd_mode": "vanilla_logit_only",
+        "warm_start": args.warm_start, "keep_first_last_fp32": False, "kd_mode": args.kd_mode, "dkd_alpha": args.dkd_alpha, "dkd_beta": args.dkd_beta,
         "split_manifest": manifest, "normalization": {"mean": list(CIFAR10_MEAN), "std": list(CIFAR10_STD)},
         "runtime": runtime_metadata(device), "config_source": str(config_path), "parameter_group_audit": grouping,
         "test_evaluation": "not_run",
@@ -247,7 +254,7 @@ def train_one_seed(seed: int, args: argparse.Namespace, cfg: QuantConfig, teache
     print(f"\n=== {args.run_name} seed {seed} | T={args.temperature:g}, lambda={args.kd_lambda:g} | {epochs} epochs ===")
     for epoch in range(1, epochs + 1):
         lr = optimizer.param_groups[0]["lr"]
-        train = train_epoch(student, teacher, train_loader, optimizer, device, args.temperature, args.kd_lambda, criterion, bool(args.gradient_diagnostics), f"T4 S{seed} {epoch}/{epochs}")
+        train = train_epoch(student, teacher, train_loader, optimizer, device, args.temperature, args.kd_lambda, criterion, bool(args.gradient_diagnostics), f"T4 S{seed} {epoch}/{epochs}", args.kd_mode, args.dkd_alpha, args.dkd_beta)
         val_loss, val_acc = evaluate(student, validation_loader, criterion, device)
         scheduler.step()
         for key in ("total_loss", "ce_loss", "kd_loss", "weighted_ce", "weighted_kd"):
@@ -265,7 +272,7 @@ def train_one_seed(seed: int, args: argparse.Namespace, cfg: QuantConfig, teache
     if abs(reload_acc - best_val) > 1 / 5000 + 1e-12:
         raise RuntimeError("Reloaded Task 4 checkpoint differs by more than one validation example.")
     diagnostics = verify_model(reloaded, require_all_weight_layers=True, verbose=False)
-    val_kd = validation_diagnostics(reloaded, teacher, validation_loader, criterion, device, args.temperature, args.kd_lambda)
+    val_kd = validation_diagnostics(reloaded, teacher, validation_loader, criterion, device, args.temperature, args.kd_lambda, args.kd_mode, args.dkd_alpha, args.dkd_beta)
     paths["history_dir"].mkdir(parents=True, exist_ok=True); paths["diagnostic_dir"].mkdir(parents=True, exist_ok=True)
     history_path = paths["history_dir"] / f"seed{seed}.json"
     save_json(history_path, {"history": history, "best_validation_accuracy": best_val, "best_epoch": best_epoch, "elapsed_seconds": elapsed, "config": run_config, "validation_kd_diagnostics": val_kd, "quant_diagnostics": diagnostics, "checkpoint_reload_validation_accuracy": reload_acc, "checkpoint_reload_validation_loss": reload_loss, "checkpoint_reload_accuracy_delta": abs(reload_acc-best_val)})
@@ -276,6 +283,8 @@ def train_one_seed(seed: int, args: argparse.Namespace, cfg: QuantConfig, teache
 
 def main() -> None:
     args, config_path = parse_args()
+    args.dkd_alpha = float(getattr(args, "dkd_alpha", 1.0) if getattr(args, "dkd_alpha", None) is not None else 1.0)
+    args.dkd_beta = float(getattr(args, "dkd_beta", 8.0) if getattr(args, "dkd_beta", None) is not None else 8.0)
     cfg = QuantConfig(**args.quant).validate()
     if args.temperature <= 0 or not 0 <= args.kd_lambda <= 1:
         raise ValueError("temperature must be positive and kd_lambda must lie in [0, 1].")
@@ -286,7 +295,7 @@ def main() -> None:
     results = [train_one_seed(seed, args, cfg, teacher, teacher_metadata, device, paths, config_path) for seed in args.seeds]
     scores = np.asarray([row["best_validation_accuracy"] for row in results]); best = max(results, key=lambda row: row["best_validation_accuracy"])
     paths["best_checkpoint"].parent.mkdir(parents=True, exist_ok=True); shutil.copy2(best["checkpoint"], paths["best_checkpoint"])
-    summary = {"task": "T4", "condition": args.condition, "run_name": args.run_name, "architecture": "ResNet18-CIFAR-ternary", "kd_mode": "vanilla_logit_only", "temperature": args.temperature, "kd_lambda": args.kd_lambda, "teacher": teacher_metadata, "quant_config": cfg.serializable(), "warm_start": args.warm_start, "all_conv_and_fc_ternary": True, "training_seeds": list(args.seeds), "epochs": 1 if args.smoke else args.epochs, "validation_mean": float(scores.mean()), "validation_std": float(scores.std(ddof=1)) if len(scores)>1 else 0.0, "validation_best": float(scores.max()), "best_seed": best["seed"], "best_checkpoint": str(paths["best_checkpoint"]), "per_seed": results, "sparsity_mean": float(np.mean([row["sparsity"] for row in results])), "test_evaluation": "not_run", "test_mean": None, "test_std": None, "note": "Validation-only strict ternary QAT plus vanilla logit KD; no test loader is imported."}
+    summary = {"task": "T4", "condition": args.condition, "run_name": args.run_name, "architecture": "ResNet18-CIFAR-ternary", "kd_mode": args.kd_mode, "temperature": args.temperature, "kd_lambda": args.kd_lambda, "dkd_alpha": args.dkd_alpha, "dkd_beta": args.dkd_beta, "teacher": teacher_metadata, "quant_config": cfg.serializable(), "warm_start": args.warm_start, "all_conv_and_fc_ternary": True, "training_seeds": list(args.seeds), "epochs": 1 if args.smoke else args.epochs, "validation_mean": float(scores.mean()), "validation_std": float(scores.std(ddof=1)) if len(scores)>1 else 0.0, "validation_best": float(scores.max()), "best_seed": best["seed"], "best_checkpoint": str(paths["best_checkpoint"]), "per_seed": results, "sparsity_mean": float(np.mean([row["sparsity"] for row in results])), "test_evaluation": "not_run", "test_mean": None, "test_std": None, "note": "Validation-only strict ternary QAT; no test loader is imported."}
     save_json(paths["summary"], summary)
     print(f"Task 4 validation: {100*summary['validation_mean']:.2f}% ± {100*summary['validation_std']:.2f}%\nSummary: {paths['summary']}")
 

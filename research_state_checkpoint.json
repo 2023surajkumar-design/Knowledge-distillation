@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-09-10T00:00:00+05:30",
+  "run_mode": "TIME_CONSTRAINED_UNIFIED_NOTEBOOK_EXECUTION",
+  "completed_tasks": ["Task 1", "Task 2", "Task 3"],
+  "task4_seed_completion": {"complete": [42, 43, 44], "remaining": []},
+  "task4_completed_anchor": {
+    "seed": 42,
+    "validation_accuracy": 0.9514,
+    "best_epoch": 158,
+    "checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_rerun1/resnet18_ternary_kd_seed42.pth",
+    "history": "experiments/task4/histories/task4_b3_final_t2_lam09_rerun1/seed42.json",
+    "test_evaluation": "not_run"
+  },
+  "task4_validation": {"mean": 0.9512, "std": 0.00151, "per_seed": {"42": 0.9514, "43": 0.9496, "44": 0.9526}},
+  "active_training": {
+    "run_name": "task5_dkd_screen_t2_lam09_a1_b8_r1",
+    "config": "configs/kd/resnet18_ternary_dkd_screen.yaml",
+    "seeds": [42],
+    "purpose": "first evidence-gated post-Task-4 advanced-KD screen"
+  },
+  "automl_status": "PAUSED_NOT_ABANDONED",
+  "research_ledger": "research_db/experiments.jsonl",
+  "test_evaluation": "LOCKED_NOT_RUN",
+  "next_experiment_after_completion": "Review DKD validation and diagnostics; promote only if the evidence gate is met."
+}

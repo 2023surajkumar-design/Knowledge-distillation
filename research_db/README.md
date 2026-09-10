@@ -1,5 +1,12 @@
 # Research experiment memory
 
+## CURRENT RESEARCH EXECUTION STATE
+
+Current mode is **TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION**. Task 4 has
+one preserved completed seed (42) and two remaining seeds (43, 44). Deep
+AutoResearch/AutoML is **PAUSED, NOT ABANDONED**; this database and the
+associated research documents are the explicit future resumption checkpoint.
+
 `experiments.jsonl` is append-only.  Every line conforms to `schema.json` and
 records an experiment or an explicit pending state.  Training scripts should
 write their normal result JSON first; the registry then references that

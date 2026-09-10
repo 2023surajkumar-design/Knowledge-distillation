@@ -1,5 +1,13 @@
 # AutoML and AutoResearch policy
 
+## CURRENT RESEARCH EXECUTION STATE
+
+The active mode is **TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION**. Task 4 is
+1/3 complete (seed 42) with seeds 43 and 44 pending under the unchanged
+protocol. Broad AutoResearch/AutoML is **PAUSED, NOT ABANDONED**: no broad
+search is authorized until the Task-4 control is completed and a later
+time-budget decision resumes this policy.
+
 ## Roles
 
 - **Research planning:** writes a falsifiable hypothesis, control, observable,

@@ -1,5 +1,19 @@
 # KD.md — Evidence-Gated Research Roadmap
 
+## CURRENT RESEARCH EXECUTION STATE
+
+**Mode:** TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION.  **Task 4 is in
+progress: 1/3 seeds are complete (seed 42); seeds 43 and 44 remain.**  The
+completed seed-42 checkpoint, history, configuration, diagnostics and plots
+are immutable historical evidence and must not be overwritten or retrained.
+
+Deep AutoResearch/AutoML is **PAUSED, NOT ABANDONED**.  Its hypotheses,
+ledger, literature map, policy, failure analysis and database remain the
+resume point.  The immediate objective is to complete Task 4 through the
+single `ATDL_post_task4_end_to_end_research.ipynb` controller, using the
+frozen protocol and validation only; later work resumes the evidence-gated
+program from the preserved state.
+
 ## Purpose
 
 This is the operational roadmap for knowledge distillation under a strict

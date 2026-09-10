@@ -1,5 +1,12 @@
 # Research ledger
 
+## CURRENT RESEARCH EXECUTION STATE
+
+**TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION:** Task 4 is 1/3 complete
+(seed 42); seeds 43 and 44 remain. The frozen, completed seed is preserved as
+the baseline anchor. Deep AutoResearch/AutoML is **PAUSED, NOT ABANDONED**;
+the documents and `research_db/` are its durable continuation point.
+
 ## Confirmed
 
 - The Task-3 B2 baseline is strict all-Conv/FC ternary QAT and reload-verifies.

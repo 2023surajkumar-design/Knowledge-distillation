@@ -1,5 +1,17 @@
 # Post–Task 4 audit
 
+## CURRENT RESEARCH EXECUTION STATE
+
+**TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION.** Task 4 is **1/3 seeds
+complete**: the preserved clean rerun seed 42 reached 95.14% validation at
+epoch 158. Seeds 43 and 44 remain and will be run from the same frozen
+protocol in a distinct append-only continuation. The older interrupted seed-43
+checkpoint remains an audit artifact only; it is not a completed seed result.
+
+Deep AutoResearch/AutoML is **PAUSED, NOT ABANDONED**. No official test data
+may be used. The future resume point is the preserved research ledger/database
+and the unified notebook's state checkpoint.
+
 **Audit state:** the Task 4 final 200-epoch × three-seed reproduction is
 incomplete. Seed 42 completed and produced a history/diagnostic; seed 43 has
 only an append-only best checkpoint (epoch 21, 93.58% validation); seed 44 did
