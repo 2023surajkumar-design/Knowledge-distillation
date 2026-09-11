@@ -27,7 +27,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from src.data import CIFAR10_MEAN, CIFAR10_STD, get_train_val_loaders, split_manifest
 from src.evaluation.verify_ternary import build_from_checkpoint, verify_model
-from src.kd.losses import decoupled_kd_loss, vanilla_kd_loss
+from src.kd.losses import decoupled_kd_loss, dist_loss, vanilla_kd_loss
 from src.kd.teacher import assert_teacher_frozen, load_frozen_teacher
 from src.models.resnet_cifar import resnet18_cifar
 from src.quant.ternary import QuantConfig, TernaryConv2d, TernaryLinear, convert_to_ternary, parameter_group_audit, ternary_parameter_groups
@@ -36,7 +36,7 @@ from src.training.utils import evaluate, get_device, make_warmup_cosine, runtime
 
 def parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Task 4 vanilla logit-KD + strict ternary QAT.")
-    p.add_argument("--kd-mode", choices=["vanilla", "dkd"], default="vanilla")
+    p.add_argument("--kd-mode", choices=["vanilla", "dkd", "dist"], default="vanilla")
     p.add_argument("--dkd-alpha", type=float); p.add_argument("--dkd-beta", type=float)
     p.add_argument("--config", default="configs/kd/resnet18_ternary_vanillaKD.yaml")
     p.add_argument("--run-name"); p.add_argument("--condition")
@@ -141,8 +141,11 @@ def gradient_diagnostics(ce: torch.Tensor, kd: torch.Tensor, parameters: list[to
 
 
 def _distill(mode, student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta):
-    return (decoupled_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta)
-            if mode == "dkd" else vanilla_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion))
+    if mode == "dkd":
+        return decoupled_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta)
+    if mode == "dist":
+        return dist_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta)
+    return vanilla_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion)
 
 
 def train_epoch(student, teacher, loader, optimizer, device, temperature, kd_lambda, criterion, with_gradient_diagnostics: bool, description: str, mode="vanilla", alpha=1., beta=8.) -> dict:

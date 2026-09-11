@@ -1,0 +1,131 @@
+{
+  "generated": "2026-09-11T11:44:15.113731+05:30",
+  "test_evaluation": "LOCKED_NOT_RUN",
+  "rows": [
+    {
+      "model": "FP32 ResNet-34 teacher",
+      "architecture": "ResNet-34",
+      "deployment": "FP32",
+      "kd_method": "none",
+      "status": "confirmed reference",
+      "seeds": [],
+      "validation_mean": 0.9554,
+      "validation_std": null,
+      "best_validation": 0.9554,
+      "best_epoch": null,
+      "strict_ternary": false,
+      "sparsity": null,
+      "quant_error": null,
+      "theoretical_compression": 1.0,
+      "test_evaluation": "not_run",
+      "source": "resnet34_cifar10_fp32_best.pth + documented Task 1 validation metadata"
+    },
+    {
+      "model": "FP32 ResNet-18",
+      "architecture": "ResNet-18",
+      "deployment": "FP32",
+      "kd_method": "none",
+      "status": "confirmed",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "validation_mean": 0.9533999999999999,
+      "validation_std": 0.0014000000000000123,
+      "best_validation": 0.9548,
+      "best_epoch": 195,
+      "strict_ternary": null,
+      "sparsity": null,
+      "quant_error": null,
+      "theoretical_compression": null,
+      "test_evaluation": "not_run",
+      "source": "results/task2_final_summary.json"
+    },
+    {
+      "model": "Ternary ResNet-18",
+      "architecture": "ResNet-18",
+      "deployment": "strict ternary QAT",
+      "kd_method": "none",
+      "status": "confirmed",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "validation_mean": 0.9520666666666666,
+      "validation_std": 0.0008082903768654466,
+      "best_validation": 0.9528,
+      "best_epoch": 195,
+      "strict_ternary": true,
+      "sparsity": 0.4714,
+      "quant_error": 0.5589,
+      "theoretical_compression": 20.2,
+      "test_evaluation": "not_run",
+      "source": "results/task3_b2_default_summary.json"
+    },
+    {
+      "model": "Vanilla ternary KD",
+      "architecture": "ResNet-18",
+      "deployment": "strict ternary QAT",
+      "kd_method": "vanilla KD",
+      "status": "confirmed control",
+      "seeds": [
+        43,
+        44
+      ],
+      "validation_mean": 0.9512,
+      "validation_std": 0.00151,
+      "best_validation": 0.9526,
+      "best_epoch": 182,
+      "strict_ternary": true,
+      "sparsity": 0.4768,
+      "quant_error": 0.5616,
+      "theoretical_compression": 20.2,
+      "test_evaluation": "not_run",
+      "source": "results/task4/task4_b3_final_t2_lam09_remaining_rerun1_summary.json"
+    },
+    {
+      "model": "DKD",
+      "architecture": "ResNet-18",
+      "deployment": "strict ternary QAT",
+      "kd_method": "DKD",
+      "status": "rejected",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "validation_mean": 0.9488,
+      "validation_std": 0.0015999999999999903,
+      "best_validation": 0.9504,
+      "best_epoch": 191,
+      "strict_ternary": true,
+      "sparsity": 0.4767,
+      "quant_error": null,
+      "theoretical_compression": 20.2,
+      "test_evaluation": "not_run",
+      "source": "results/task4/task5_dkd_final_t2_lam09_a1_b8_r1_summary.json"
+    },
+    {
+      "model": "DIST",
+      "architecture": "ResNet-18",
+      "deployment": "strict ternary QAT",
+      "kd_method": "DIST",
+      "status": "screening",
+      "seeds": [
+        42
+      ],
+      "validation_mean": 0.9494,
+      "validation_std": 0.0,
+      "best_validation": 0.9494,
+      "best_epoch": 49,
+      "strict_ternary": true,
+      "sparsity": null,
+      "quant_error": null,
+      "theoretical_compression": 20.2,
+      "test_evaluation": "not_run",
+      "source": "results/task4/task6_dist_screen_t2_lam09_i1_a1_r1_summary.json"
+    }
+  ]
+}

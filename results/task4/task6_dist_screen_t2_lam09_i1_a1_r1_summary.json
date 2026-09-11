@@ -1,0 +1,87 @@
+{
+  "all_conv_and_fc_ternary": true,
+  "architecture": "ResNet18-CIFAR-ternary",
+  "best_checkpoint": "/home/vu-lab03-pc17/ATDL-1/results/task4/best_models/task6_dist_screen_t2_lam09_i1_a1_r1_best.pth",
+  "best_seed": 42,
+  "condition": "T6-DIST-screen-T2-lambda09-inter1-intra1",
+  "dkd_alpha": 1.0,
+  "dkd_beta": 1.0,
+  "epochs": 50,
+  "kd_lambda": 0.9,
+  "kd_mode": "dist",
+  "note": "Validation-only strict ternary QAT; no test loader is imported.",
+  "per_seed": [
+    {
+      "all_ternary": true,
+      "best_epoch": 49,
+      "best_validation_accuracy": 0.9494,
+      "checkpoint": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/checkpoints/task6_dist_screen_t2_lam09_i1_a1_r1/resnet18_ternary_kd_seed42.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "elapsed_seconds": 694.0908410970005,
+      "final_augmented_train_accuracy": 0.9998444444444444,
+      "final_validation_accuracy": 0.9466,
+      "history": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/histories/task6_dist_screen_t2_lam09_i1_a1_r1/seed42.json",
+      "plots": [
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task6_dist_screen_t2_lam09_i1_a1_r1/seed42_loss.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task6_dist_screen_t2_lam09_i1_a1_r1/seed42_acc.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task6_dist_screen_t2_lam09_i1_a1_r1/seed42_gap.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task6_dist_screen_t2_lam09_i1_a1_r1/seed42_lr.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task6_dist_screen_t2_lam09_i1_a1_r1/seed42_contributions.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task6_dist_screen_t2_lam09_i1_a1_r1/seed42_gradient.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task6_dist_screen_t2_lam09_i1_a1_r1/seed42_gradient_cosine.png"
+      ],
+      "quant_error_mean": 0.5460510233271026,
+      "seconds_per_epoch": 13.88181682194001,
+      "seed": 42,
+      "sparsity": 0.46253118855442754,
+      "validation_kd_diagnostics": {
+        "agreement": 0.953,
+        "ce": 0.6432071934700012,
+        "kd": 2.284693326950073,
+        "student_confidence": 0.8940656368255615,
+        "student_correct": 0.9494,
+        "student_entropy": 0.5309041621208191,
+        "student_margin": 0.8709240589141846,
+        "teacher_confidence": 0.8974391421318054,
+        "teacher_correct": 0.9554,
+        "teacher_entropy": 0.5315583398818969,
+        "teacher_margin": 0.8771539717674255
+      }
+    }
+  ],
+  "quant_config": {
+    "clip": 1.0,
+    "scale": "derived",
+    "scope": "per_channel",
+    "ste": "clipped",
+    "symmetric": true,
+    "t": 0.05,
+    "threshold": "twn",
+    "twn_factor": 0.7
+  },
+  "run_name": "task6_dist_screen_t2_lam09_i1_a1_r1",
+  "sparsity_mean": 0.46253118855442754,
+  "task": "T4",
+  "teacher": {
+    "arch": "ResNet34-CIFAR",
+    "best_validation_accuracy": 0.9554,
+    "device": "cuda",
+    "mode": "eval",
+    "parameter_count": 21282122,
+    "path": "resnet34_cifar10_fp32_best.pth",
+    "requires_grad_any": false,
+    "selection_metric": null,
+    "sha256": "ed19ff5fa0870ea3979377e869a0da508ebe03a78456d528eb2810b972badef6"
+  },
+  "temperature": 2.0,
+  "test_evaluation": "not_run",
+  "test_mean": null,
+  "test_std": null,
+  "training_seeds": [
+    42
+  ],
+  "validation_best": 0.9494,
+  "validation_mean": 0.9494,
+  "validation_std": 0.0,
+  "warm_start": "results/best_models/task2_b1_fp32_resnet18_best.pth"
+}

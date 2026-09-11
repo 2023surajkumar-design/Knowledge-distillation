@@ -2,10 +2,10 @@
 
 ## CURRENT RESEARCH EXECUTION STATE
 
-**Mode:** TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION.  **Task 4 is in
-progress: 1/3 seeds are complete (seed 42); seeds 43 and 44 remain.**  The
-completed seed-42 checkpoint, history, configuration, diagnostics and plots
-are immutable historical evidence and must not be overwritten or retrained.
+**Mode:** TIME-CONSTRAINED FINALIZATION. **Task 4 is complete for seeds 42,
+43, and 44 at 95.12% +/- 0.15% validation.** The completed checkpoints,
+histories, configurations, diagnostics and plots are immutable evidence and
+must not be overwritten or retrained.
 
 Deep AutoResearch/AutoML is **PAUSED, NOT ABANDONED**.  Its hypotheses,
 ledger, literature map, policy, failure analysis and database remain the

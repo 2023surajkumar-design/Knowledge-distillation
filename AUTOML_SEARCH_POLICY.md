@@ -2,11 +2,11 @@
 
 ## CURRENT RESEARCH EXECUTION STATE
 
-The active mode is **TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION**. Task 4 is
-1/3 complete (seed 42) with seeds 43 and 44 pending under the unchanged
-protocol. Broad AutoResearch/AutoML is **PAUSED, NOT ABANDONED**: no broad
-search is authorized until the Task-4 control is completed and a later
-time-budget decision resumes this policy.
+The active mode is **TIME-CONSTRAINED FINALIZATION**. Task 4 is complete at
+95.12% +/- 0.15% validation. DKD is rejected at 94.88% mean and DIST remains
+screening-only at 94.94%. Broad AutoResearch/AutoML is **PAUSED, NOT
+ABANDONED**; future work must resume with a separately reviewed one-seed
+experiment rather than repeating completed runs.
 
 ## Roles
 

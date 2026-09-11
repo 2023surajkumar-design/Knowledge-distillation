@@ -1,0 +1,8 @@
+{
+  "parameter_count": 11173962,
+  "fp32_bits": 357566784,
+  "ideal_ternary_bits_plus_64_scales": 17712358.75448317,
+  "theoretical_ratio": 20.187417664487874,
+  "sparsity_reference": 0.4714,
+  "caveat": "The ratio excludes packing/runtime overhead and does not imply hardware speedup."
+}

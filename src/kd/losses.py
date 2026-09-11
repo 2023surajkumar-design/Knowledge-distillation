@@ -59,6 +59,24 @@ def decoupled_kd_loss(
                          weighted_ce=weighted_ce, weighted_kd=weighted_kd)
 
 
+def dist_loss(student_logits, teacher_logits, targets, temperature, kd_lambda, ce_criterion,
+              inter_weight: float = 1.0, intra_weight: float = 1.0) -> VanillaKDLoss:
+    """One-batch DIST screen: transfer inter/intra class probability relations."""
+    if temperature <= 0 or not 0 <= kd_lambda <= 1:
+        raise ValueError("Invalid DIST hyperparameters.")
+    ce = ce_criterion(student_logits, targets)
+    sp = F.softmax(student_logits / temperature, dim=1)
+    tp = F.softmax(teacher_logits / temperature, dim=1)
+    def correlation(a, b, dim):
+        a = a - a.mean(dim=dim, keepdim=True); b = b - b.mean(dim=dim, keepdim=True)
+        return (a*b).sum(dim=dim) / (a.square().sum(dim=dim).sqrt()*b.square().sum(dim=dim).sqrt() + 1e-12)
+    inter = 1.0 - correlation(sp, tp, dim=1).mean()
+    intra = 1.0 - correlation(sp, tp, dim=0).mean()
+    kd = (inter_weight * inter + intra_weight * intra) * temperature**2
+    weighted_ce, weighted_kd = (1-kd_lambda)*ce, kd_lambda*kd
+    return VanillaKDLoss(total=weighted_ce+weighted_kd, ce=ce, kd=kd, weighted_ce=weighted_ce, weighted_kd=weighted_kd)
+
+
 def vanilla_kd_loss(
     student_logits: torch.Tensor,
     teacher_logits: torch.Tensor,

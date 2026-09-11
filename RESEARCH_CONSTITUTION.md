@@ -2,11 +2,11 @@
 
 ## CURRENT RESEARCH EXECUTION STATE
 
-**Mode: TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION.** Task 4 has exactly one
-completed seed (42) and two remaining seeds (43, 44). Preserve all Task 1–4
-artifacts, especially the completed seed-42 Task-4 anchor; do not overwrite or
-reinterpret it. Broad AutoResearch/AutoML is **PAUSED, NOT ABANDONED**, and
-must remain resumable from the research documents and `research_db/`.
+**Mode: TIME-CONSTRAINED FINALIZATION.** Task 4 is complete for seeds 42, 43,
+and 44 with a 95.12% +/- 0.15% validation control. Preserve all Task 1–4
+artifacts and do not overwrite or reinterpret them. Broad AutoResearch/AutoML
+is **PAUSED, NOT ABANDONED**, and must remain resumable from the research
+documents and `research_db/`. The official test set remains locked.
 
 This constitution governs every experiment after Task 4.  It supersedes earlier
 forward-looking plans when they conflict with the experimentally established

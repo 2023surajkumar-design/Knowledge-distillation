@@ -2,10 +2,12 @@
 
 ## CURRENT RESEARCH EXECUTION STATE
 
-**TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION:** Task 4 is 1/3 complete
-(seed 42); seeds 43 and 44 remain. The frozen, completed seed is preserved as
-the baseline anchor. Deep AutoResearch/AutoML is **PAUSED, NOT ABANDONED**;
-the documents and `research_db/` are its durable continuation point.
+**TIME-CONSTRAINED FINALIZATION:** Task 4 is complete for seeds 42, 43, and
+44 at 95.12% +/- 0.15% validation. DKD completed at 94.88% mean and is
+rejected; DIST reached 94.94% in a one-seed screen and remains screening-only.
+Deep AutoResearch/AutoML is **PAUSED, NOT ABANDONED**; the documents and
+`research_db/` are its durable continuation point. The official test set was
+not used.
 
 ## Confirmed
 
@@ -20,9 +22,8 @@ the documents and `research_db/` are its durable continuation point.
 
 ## Promising
 
-- Vanilla KD T=2/lambda=0.9 is the Stage-3 leader (95.21% ± 0.07%), but not
-  yet a demonstrated improvement over T3.  The 200-epoch × three-seed final is
-  active.
+- The completed vanilla Task 4 control is 95.12% +/- 0.15%; it is retained as
+  the current final control and does not establish a clear gain over Task 3.
 - The KD winner's lower quantisation error and sparsity suggest a measurable
   target/quantiser interaction worth diagnosing, not yet optimising.
 
@@ -37,15 +38,16 @@ the documents and `research_db/` are its durable continuation point.
 
 ## Inconclusive
 
-- Whether vanilla KD improves 200-epoch, three-seed validation accuracy.
+- Whether a quantization-compatible knowledge representation can improve on
+  the strong ternary Task 3/Task 4 controls.
 - Whether CE/KD gradients conflict; Stage-4 screening did not log this signal.
 - Whether the label-smoothed teacher is a limitation; no permitted alternate
   frozen teacher exists.
 
 ## Needs reproduction
 
-- The final Task-4 T=2/lambda=0.9 result, after all three seeds finish.
-- Any Task-5 candidate that clears the predefined screen gate.
+- A future one-seed quantization-compatible KD candidate, if explicitly
+  authorized after the time-constrained phase.
 
 ## Next hypotheses
 

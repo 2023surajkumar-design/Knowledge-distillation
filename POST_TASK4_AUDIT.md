@@ -2,11 +2,10 @@
 
 ## CURRENT RESEARCH EXECUTION STATE
 
-**TIME-CONSTRAINED UNIFIED NOTEBOOK EXECUTION.** Task 4 is **1/3 seeds
-complete**: the preserved clean rerun seed 42 reached 95.14% validation at
-epoch 158. Seeds 43 and 44 remain and will be run from the same frozen
-protocol in a distinct append-only continuation. The older interrupted seed-43
-checkpoint remains an audit artifact only; it is not a completed seed result.
+**TIME-CONSTRAINED FINALIZATION.** Task 4 is **complete for seeds 42, 43,
+and 44** with a 95.12% +/- 0.15% validation control. DKD completed at 94.88%
+mean across three seeds and is rejected; DIST reached 94.94% in a one-seed
+screen and remains screening-only. The official test set was not used.
 
 Deep AutoResearch/AutoML is **PAUSED, NOT ABANDONED**. No official test data
 may be used. The future resume point is the preserved research ledger/database

@@ -1,8 +1,19 @@
 {
-  "timestamp": "2026-09-10T00:00:00+05:30",
-  "run_mode": "TIME_CONSTRAINED_UNIFIED_NOTEBOOK_EXECUTION",
-  "completed_tasks": ["Task 1", "Task 2", "Task 3"],
-  "task4_seed_completion": {"complete": [42, 43, 44], "remaining": []},
+  "timestamp": "2026-09-11T11:43:01.877750+05:30",
+  "run_mode": "TIME-CONSTRAINED FINALIZATION",
+  "completed_tasks": [
+    "Task 1",
+    "Task 2",
+    "Task 3"
+  ],
+  "task4_seed_completion": {
+    "complete": [
+      42,
+      43,
+      44
+    ],
+    "remaining": []
+  },
   "task4_completed_anchor": {
     "seed": 42,
     "validation_accuracy": 0.9514,
@@ -11,15 +22,84 @@
     "history": "experiments/task4/histories/task4_b3_final_t2_lam09_rerun1/seed42.json",
     "test_evaluation": "not_run"
   },
-  "task4_validation": {"mean": 0.9512, "std": 0.00151, "per_seed": {"42": 0.9514, "43": 0.9496, "44": 0.9526}},
-  "active_training": {
-    "run_name": "task5_dkd_screen_t2_lam09_a1_b8_r1",
-    "config": "configs/kd/resnet18_ternary_dkd_screen.yaml",
-    "seeds": [42],
-    "purpose": "first evidence-gated post-Task-4 advanced-KD screen"
+  "task4_validation": {
+    "mean": 0.9512,
+    "std": 0.00151,
+    "per_seed": {
+      "42": 0.9514,
+      "43": 0.9496,
+      "44": 0.9526
+    }
   },
+  "active_training": null,
   "automl_status": "PAUSED_NOT_ABANDONED",
   "research_ledger": "research_db/experiments.jsonl",
   "test_evaluation": "LOCKED_NOT_RUN",
-  "next_experiment_after_completion": "Review DKD validation and diagnostics; promote only if the evidence gate is met."
+  "next_experiment_after_completion": "Resume deep research with a separately reviewed one-seed experiment.",
+  "dkd_shortlist": {
+    "candidate": {
+      "43": 0.9468,
+      "44": 0.9486
+    },
+    "matched_t4": {
+      "43": 0.939,
+      "44": 0.9372
+    },
+    "mean_delta": 0.009599999999999997,
+    "threshold": 0.002,
+    "decision": "REJECT_FINAL_CANDIDATE"
+  },
+  "final_method": "vanilla KD (Task 4 control)",
+  "final_summary": "report/final/final_comparison.json",
+  "final_validation_mean": 0.9512,
+  "final_validation_std": 0.00151,
+  "current_best_checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth",
+  "current_best_configuration": "configs/kd/resnet18_ternary_vanillaKD_remaining_rerun1.yaml",
+  "task3_validation": {
+    "mean": 0.9520666666666666,
+    "std": 0.0008082903768654466,
+    "best": 0.9528,
+    "sparsity": 0.4714,
+    "quantization_error_mean": 0.5589
+  },
+  "execution_status": {
+    "status": "COMPLETE_VALIDATION_ONLY",
+    "active_training": null,
+    "current_best_method": "vanilla KD (Task 4 control)",
+    "current_best_validation_mean": 0.9512,
+    "dkd_validation_mean": 0.9488,
+    "dist_validation_mean": 0.9494,
+    "official_test": "LOCKED_NOT_RUN",
+    "next_step": "Resume deep research with a separately reviewed one-seed experiment."
+  },
+  "notebook": "ATDL_post_task4_end_to_end_research.ipynb",
+  "methods_executed": [
+    "Task 3",
+    "vanilla Task 4",
+    "DKD confirmation",
+    "DIST smoke",
+    "DIST screen"
+  ],
+  "methods_skipped": {
+    "new_training": "No remaining implemented method has evidence above the completed Task 4 control."
+  },
+  "future_resumption_point": "Review and authorize one new supported one-seed method; preserve the test firewall and append artifacts.",
+  "report_artifacts": {
+    "comparison": "report/final/final_comparison.json",
+    "compression": "report/final/compression_analysis.json",
+    "markdown": "report/final/final_validation_report.md",
+    "pdf": "report/final/final_validation_report.pdf",
+    "plots": [
+      "plots/final/validation_comparison.png",
+      "plots/final/training_validation_curves.png"
+    ]
+  },
+  "diagnostics_availability": {
+    "prediction": "available in per-seed validation_kd_diagnostics",
+    "ce_kd_losses": "available in histories and plots",
+    "gradient": "available for Task 4/DKD/DIST diagnostics where logged",
+    "layer_quantization": "available in quant_diagnostics where logged",
+    "representation_similarity": "unavailable; not logged in preserved runs",
+    "official_test": "locked and not accessed"
+  }
 }

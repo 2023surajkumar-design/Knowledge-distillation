@@ -10,6 +10,15 @@ classify it before scheduling a successor.
 | Accuracy down, KD dominates CE | CE/KD weighted contributions, gradient norms | lower/schedule KD weight only after a matched control |
 | Accuracy down, CE/KD gradients conflict | norm, cosine, conflict frequency | test a target transform or balancing mechanism, not a stack of losses |
 | Stable loss but no accuracy gain | agreement, entropy, margins, teacher-correct subset | test DKD/DIST or confidence filtering |
+
+## Final advanced-KD findings (2026-09-11)
+
+DKD underperformed the vanilla Task 4 control: 94.88% mean versus 95.12% mean,
+despite passing strict ternary and checkpoint-reload checks. DIST reached
+94.94% in its one-seed screen and is therefore screening-only. These results
+support the hypothesis that changing the KD decomposition does not
+automatically overcome the ternary representational bottleneck. The official
+test set was not used.
 | Training instability | non-finite checks, LR, gradient norms, checkpoint/reload | optimisation-only smoke before changing the method |
 | Apparent one-seed gain | seed distribution | reproduce; do not interpret as improvement |
 
