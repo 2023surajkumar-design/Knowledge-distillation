@@ -1,0 +1,82 @@
+[
+  {
+    "arch": "ResNet18-CIFAR-ternary",
+    "best_accuracy": 0.9528,
+    "checkpoint": "experiments/checkpoints/task3_b2_default/resnet18_ternary_seed44.pth",
+    "compression": 20.18975211428664,
+    "epoch": 171,
+    "finite_output": true,
+    "layer_coverage": true,
+    "output_shape": [
+      2,
+      10
+    ],
+    "sha256": "9c5e14a9caee70e22cd1a6eb7d86d40c1af0a4edd6cc347e2e4fa62595c27c27",
+    "sparsity": 0.4711684117448106,
+    "ternary": true
+  },
+  {
+    "arch": "ResNet18-CIFAR-ternary",
+    "best_accuracy": 0.9514,
+    "checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_rerun1/resnet18_ternary_kd_seed42.pth",
+    "compression": 20.18975211428664,
+    "epoch": 158,
+    "finite_output": true,
+    "layer_coverage": true,
+    "output_shape": [
+      2,
+      10
+    ],
+    "sha256": "ef5dbcb74bafdb367d817c8bc1d87684f8f3d9439a05cfa922683d4ae3775ea2",
+    "sparsity": 0.47752354995614615,
+    "ternary": true
+  },
+  {
+    "arch": "ResNet18-CIFAR-ternary",
+    "best_accuracy": 0.9526,
+    "checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth",
+    "compression": 20.18975211428664,
+    "epoch": 182,
+    "finite_output": true,
+    "layer_coverage": true,
+    "output_shape": [
+      2,
+      10
+    ],
+    "sha256": "3767ff3fc95eedd562dc3a28b7c9326a8c3a57256a96d5bdbc161901045ab242",
+    "sparsity": 0.4767321023199555,
+    "ternary": true
+  },
+  {
+    "arch": "ResNet18-CIFAR-ternary",
+    "best_accuracy": 0.9504,
+    "checkpoint": "experiments/task4/checkpoints/task5_dkd_final_t2_lam09_a1_b8_r1/resnet18_ternary_kd_seed42.pth",
+    "compression": 20.18975211428664,
+    "epoch": 175,
+    "finite_output": true,
+    "layer_coverage": true,
+    "output_shape": [
+      2,
+      10
+    ],
+    "sha256": "fdf66d7aaa8f9ef7abee172baa4eb5062ea8e403fa5478c5e1fd619e1ae1abf9",
+    "sparsity": 0.49883504210544416,
+    "ternary": true
+  },
+  {
+    "arch": "ResNet18-CIFAR-ternary",
+    "best_accuracy": 0.9494,
+    "checkpoint": "experiments/task4/checkpoints/task6_dist_screen_t2_lam09_i1_a1_r1/resnet18_ternary_kd_seed42.pth",
+    "compression": 20.18975211428664,
+    "epoch": 49,
+    "finite_output": true,
+    "layer_coverage": true,
+    "output_shape": [
+      2,
+      10
+    ],
+    "sha256": "f5ff49ed2bb8c8570ed239298653e93d10cafb6bc5a63c59f2f5374bb1701758",
+    "sparsity": 0.4625310094128168,
+    "ternary": true
+  }
+]

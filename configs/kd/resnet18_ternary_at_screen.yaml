@@ -1,0 +1,24 @@
+task: T7_ternary_resnet18_attention_screen
+condition: T7-AT-screen-T2-lambda09-aux1
+run_name: task9_at_screen_t2_lam09_aux1_r1
+data_root: ./data
+batch_size: 128
+num_workers: 4
+epochs: 50
+lr: 0.1
+momentum: 0.9
+nesterov: true
+weight_decay: 0.0001
+warmup_epochs: 5
+label_smoothing: 0.1
+seeds: [42]
+teacher_checkpoint: resnet34_cifar10_fp32_best.pth
+teacher_tag: task1_ls01
+temperature: 2.0
+kd_lambda: 0.9
+dkd_alpha: 1.0
+dkd_beta: 1.0
+warm_start: results/best_models/task2_b1_fp32_resnet18_best.pth
+keep_first_last_fp32: false
+gradient_diagnostics: true
+quant: {threshold: twn, scale: derived, symmetric: true, scope: per_channel, t: 0.05, twn_factor: 0.7, ste: clipped, clip: 1.0}

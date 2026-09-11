@@ -1,0 +1,35 @@
+{
+  "current_best_method": "vanilla KD (Task 4 control)",
+  "current_best_validation_mean": 0.9512,
+  "task4_control": {
+    "mean": 0.9512,
+    "std": 0.00151,
+    "per_seed": {
+      "42": 0.9514,
+      "43": 0.9496,
+      "44": 0.9526
+    }
+  },
+  "dkd": {
+    "mean": 0.9488,
+    "best": 0.9504
+  },
+  "dist_screen": {
+    "mean": 0.9494
+  },
+  "dist_continuation": {
+    "mean": 0.9502,
+    "status": "provisional negative"
+  },
+  "test_evaluation": "LOCKED_NOT_RUN",
+  "unsupported_methods": [
+    "FitNet",
+    "Attention Transfer",
+    "RKD",
+    "QFD",
+    "QTRD",
+    "adaptive KD",
+    "progressive QAT"
+  ],
+  "future_action": "Implement and validate one supported new method in production code before adding a new training cell."
+}

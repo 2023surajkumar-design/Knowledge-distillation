@@ -1,0 +1,10 @@
+flowchart LR
+  D[CIFAR-10 train split 45k] --> T[FP32 ResNet-34 teacher]
+  D --> S[ResNet-18 student]
+  T --> K[Teacher logits, eval and frozen]
+  S --> Q[Per-channel symmetric TWN QAT]
+  Q --> L[Strict ternary Conv/FC deployed weights]
+  K --> KD[Temperature-scaled KD]
+  L --> KD
+  KD --> V[Validation-only model selection]
+  V --> C[Reload and ternary verification]

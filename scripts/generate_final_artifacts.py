@@ -53,6 +53,7 @@ rows = [
     row("Vanilla ternary KD", "ResNet-18", "strict ternary QAT", "vanilla KD", "confirmed control", "results/task4/task4_b3_final_t2_lam09_remaining_rerun1_summary.json", True, 0.4768, 0.5616, 20.2),
     row("DKD", "ResNet-18", "strict ternary QAT", "DKD", "rejected", "results/task4/task5_dkd_final_t2_lam09_a1_b8_r1_summary.json", True, 0.4767, None, 20.2),
     row("DIST", "ResNet-18", "strict ternary QAT", "DIST", "screening", "results/task4/task6_dist_screen_t2_lam09_i1_a1_r1_summary.json", True, None, None, 20.2),
+    row("DIST T=1 lambda=0.5 continuation", "ResNet-18", "strict ternary QAT", "DIST", "provisional negative", "results/task4/task7_dist_t1_lam05_r1_summary.json", True, 0.4573, 0.5278, 20.2),
 ]
 # Task 1 has a preserved teacher checkpoint/history but no standalone summary
 # JSON; retain the documented validation reference and label its provenance.
@@ -162,8 +163,27 @@ This report uses the fixed CIFAR-10 45k/5k validation split. The official test s
 - The completed vanilla Task 4 control is the strongest verified ternary KD candidate at 95.12% validation mean.
 - DKD is rejected as the final candidate: its three-seed mean is 94.88%, below Task 4.
 - DIST remains a one-seed screening result at 94.94%, below Task 4, and is not promoted.
+- The bounded DIST T=1/lambda=0.5 continuation reached 95.02% at epoch 48 in one seed, below the Task 4 mean, and remains provisional/negative.
 - The ternary no-KD Task 3 control remains a strong reference at approximately 95.21% mean.
 - No new method was trained in the finalization pass because no supported remaining method had evidence sufficient to justify GPU expenditure under the time constraint.
+
+## Architecture and method
+
+The teacher is a CIFAR-adapted ResNet-34 with a 3x3 stride-1 stem, no ImageNet max-pool, and a 10-class classifier. The student is the corresponding CIFAR ResNet-18. Every student convolution and final fully-connected weight is converted to per-output-channel symmetric TWN-style weights. For latent weight W, Delta = 0.7 mean(|W|) per output channel, Q(W) is in {-1,0,+1}, and deployed W_hat = alpha Q(W), where alpha is the mean active absolute latent weight. BatchNorm parameters and biases remain FP32; Conv/FC weight matrices are ternary. The forward path uses W_hat throughout QAT, while the optimizer updates latent FP32 parameters through a clipped STE.
+
+The vanilla KD loss is (1-lambda) CE + lambda T^2 KL(teacher || student), with T=2 and lambda=0.9 in the completed Task 4 control. The teacher is eval-mode, frozen, excluded from the optimizer, and evaluated under torch.no_grad().
+
+## KD hyperparameter ablation
+
+The validation-only staged ablation selected T=2, lambda=0.9: 92.90% after 6 epochs, 95.16% after 30 epochs, and 95.21% +/- 0.07% after the 60-epoch Stage-3 screen. Nearby controls were T=4, lambda=0.9 at 95.14% +/- 0.06%, T=8, lambda=0.5 at 95.13% +/- 0.01%, and a lambda=0 integrity control at 94.98% best validation. These are validation-only screening results.
+
+## Required references
+
+He et al. (ResNet, CVPR 2016); Hinton, Vinyals, Dean (KD, NeurIPS Workshop 2015); Li, Zhang, Liu (Ternary Weight Networks, 2016); Li, Zhang, Liu (Trained Ternary Quantization, ICLR 2017); Bengio, Leonard, Courville (STE, 2013); Yin et al. (STE analysis, ICLR 2019).
+
+## Limitations
+
+Final CUDA runs use strict_determinism=false, while seeds, split manifests, configurations, runtime metadata, and reload checks are recorded. Theoretical ternary compression excludes scale metadata, packing, and kernel overhead; no real hardware speedup is claimed. Representation similarity was not logged and is unavailable. The official test set remains locked.
 
 ## Quantization and compression
 

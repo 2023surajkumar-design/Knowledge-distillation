@@ -30,6 +30,9 @@ ternarized — including the first conv and the final FC (C14). A diagnostic-onl
 False for the compliant baseline.
 """
 
+# DEPRECATED COMPATIBILITY COPY: production training imports src.quant.ternary.
+# Keep this historical file for provenance; do not import it for new runs.
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

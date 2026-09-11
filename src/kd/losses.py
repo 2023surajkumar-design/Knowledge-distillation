@@ -77,6 +77,46 @@ def dist_loss(student_logits, teacher_logits, targets, temperature, kd_lambda, c
     return VanillaKDLoss(total=weighted_ce+weighted_kd, ce=ce, kd=kd, weighted_ce=weighted_ce, weighted_kd=weighted_kd)
 
 
+def _with_auxiliary(base: VanillaKDLoss, auxiliary: torch.Tensor, weight: float) -> VanillaKDLoss:
+    if weight < 0:
+        raise ValueError("Auxiliary KD weight must be non-negative.")
+    kd = base.kd + weight * auxiliary
+    weighted_kd = (base.weighted_kd / (base.kd + 1e-12)) * kd
+    return VanillaKDLoss(total=base.weighted_ce + weighted_kd, ce=base.ce, kd=kd,
+                         weighted_ce=base.weighted_ce, weighted_kd=weighted_kd)
+
+
+def attention_transfer_loss(student_feature: torch.Tensor, teacher_feature: torch.Tensor) -> torch.Tensor:
+    """Normalized attention-map transfer for shape-matched terminal stages."""
+    s = student_feature.square().mean(dim=1).flatten(1)
+    t = teacher_feature.square().mean(dim=1).flatten(1)
+    return F.mse_loss(F.normalize(s, dim=1), F.normalize(t, dim=1))
+
+
+def relational_distance_loss(student_feature: torch.Tensor, teacher_feature: torch.Tensor) -> torch.Tensor:
+    """Scale-normalized pairwise distance geometry transfer (RKD-style)."""
+    s = student_feature.flatten(1); t = teacher_feature.flatten(1)
+    sd = torch.cdist(s, s, p=2); td = torch.cdist(t, t, p=2)
+    return F.smooth_l1_loss(sd / (sd.detach().mean() + 1e-12), td / (td.detach().mean() + 1e-12))
+
+
+@torch.no_grad()
+def ternarized_feature_target(feature: torch.Tensor, factor: float = 0.7) -> torch.Tensor:
+    """Per-sample/channel ternary activation proxy used only as frozen QFD target."""
+    scale = feature.abs().mean(dim=(2, 3), keepdim=True)
+    threshold = factor * scale
+    code = torch.where(feature > threshold, torch.ones_like(feature), torch.where(feature < -threshold, -torch.ones_like(feature), torch.zeros_like(feature)))
+    active = feature.abs() * (code != 0)
+    alpha = active.sum(dim=(2, 3), keepdim=True) / (code != 0).sum(dim=(2, 3), keepdim=True).clamp_min(1)
+    return code * alpha
+
+
+def quantized_feature_loss(student_feature: torch.Tensor, teacher_feature: torch.Tensor) -> torch.Tensor:
+    """QFD screen: match a frozen ternarized teacher terminal feature target."""
+    target = ternarized_feature_target(teacher_feature)
+    return F.mse_loss(F.normalize(student_feature.flatten(1), dim=1), F.normalize(target.flatten(1), dim=1))
+
+
 def vanilla_kd_loss(
     student_logits: torch.Tensor,
     teacher_logits: torch.Tensor,

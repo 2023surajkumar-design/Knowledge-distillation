@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-11T11:44:15.113731+05:30",
+  "generated": "2026-09-11T12:21:05.600376+05:30",
   "test_evaluation": "LOCKED_NOT_RUN",
   "rows": [
     {
@@ -126,6 +126,26 @@
       "theoretical_compression": 20.2,
       "test_evaluation": "not_run",
       "source": "results/task4/task6_dist_screen_t2_lam09_i1_a1_r1_summary.json"
+    },
+    {
+      "model": "DIST T=1 lambda=0.5 continuation",
+      "architecture": "ResNet-18",
+      "deployment": "strict ternary QAT",
+      "kd_method": "DIST",
+      "status": "provisional negative",
+      "seeds": [
+        42
+      ],
+      "validation_mean": 0.9502,
+      "validation_std": 0.0,
+      "best_validation": 0.9502,
+      "best_epoch": 48,
+      "strict_ternary": true,
+      "sparsity": 0.4573,
+      "quant_error": 0.5278,
+      "theoretical_compression": 20.2,
+      "test_evaluation": "not_run",
+      "source": "results/task4/task7_dist_t1_lam05_r1_summary.json"
     }
   ]
 }

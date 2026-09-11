@@ -1,0 +1,554 @@
+{
+  "checkpoint_rows": [
+    {
+      "arch": "ResNet18-CIFAR-ternary",
+      "best_accuracy": 0.9528,
+      "checkpoint": "experiments/checkpoints/task3_b2_default/resnet18_ternary_seed44.pth",
+      "compression": 20.18975211428664,
+      "epoch": 171,
+      "finite_output": true,
+      "layer_coverage": true,
+      "output_shape": [
+        2,
+        10
+      ],
+      "sha256": "9c5e14a9caee70e22cd1a6eb7d86d40c1af0a4edd6cc347e2e4fa62595c27c27",
+      "sparsity": 0.4711684117448106,
+      "ternary": true
+    },
+    {
+      "arch": "ResNet18-CIFAR-ternary",
+      "best_accuracy": 0.9514,
+      "checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_rerun1/resnet18_ternary_kd_seed42.pth",
+      "compression": 20.18975211428664,
+      "epoch": 158,
+      "finite_output": true,
+      "layer_coverage": true,
+      "output_shape": [
+        2,
+        10
+      ],
+      "sha256": "ef5dbcb74bafdb367d817c8bc1d87684f8f3d9439a05cfa922683d4ae3775ea2",
+      "sparsity": 0.47752354995614615,
+      "ternary": true
+    },
+    {
+      "arch": "ResNet18-CIFAR-ternary",
+      "best_accuracy": 0.9526,
+      "checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth",
+      "compression": 20.18975211428664,
+      "epoch": 182,
+      "finite_output": true,
+      "layer_coverage": true,
+      "output_shape": [
+        2,
+        10
+      ],
+      "sha256": "3767ff3fc95eedd562dc3a28b7c9326a8c3a57256a96d5bdbc161901045ab242",
+      "sparsity": 0.4767321023199555,
+      "ternary": true
+    },
+    {
+      "arch": "ResNet18-CIFAR-ternary",
+      "best_accuracy": 0.9504,
+      "checkpoint": "experiments/task4/checkpoints/task5_dkd_final_t2_lam09_a1_b8_r1/resnet18_ternary_kd_seed42.pth",
+      "compression": 20.18975211428664,
+      "epoch": 175,
+      "finite_output": true,
+      "layer_coverage": true,
+      "output_shape": [
+        2,
+        10
+      ],
+      "sha256": "fdf66d7aaa8f9ef7abee172baa4eb5062ea8e403fa5478c5e1fd619e1ae1abf9",
+      "sparsity": 0.49883504210544416,
+      "ternary": true
+    },
+    {
+      "arch": "ResNet18-CIFAR-ternary",
+      "best_accuracy": 0.9494,
+      "checkpoint": "experiments/task4/checkpoints/task6_dist_screen_t2_lam09_i1_a1_r1/resnet18_ternary_kd_seed42.pth",
+      "compression": 20.18975211428664,
+      "epoch": 49,
+      "finite_output": true,
+      "layer_coverage": true,
+      "output_shape": [
+        2,
+        10
+      ],
+      "sha256": "f5ff49ed2bb8c8570ed239298653e93d10cafb6bc5a63c59f2f5374bb1701758",
+      "sparsity": 0.4625310094128168,
+      "ternary": true
+    }
+  ],
+  "generated": "2026-09-11T06:28:23.969882+00:00",
+  "official_test": "LOCKED_NOT_RUN",
+  "project": "/home/vu-lab03-pc17/ATDL-1",
+  "recomputed": {
+    "dist": [
+      0.9494
+    ],
+    "dkd": [
+      0.9504,
+      0.9472,
+      0.9488
+    ],
+    "task2": [
+      0.9534,
+      0.9548,
+      0.952
+    ],
+    "task3": [
+      0.9512,
+      0.9522,
+      0.9528
+    ],
+    "task4": [
+      0.9514,
+      0.9496,
+      0.9526
+    ]
+  },
+  "results": [
+    {
+      "actual": "CIFAR10 train=True and 10 classes",
+      "evidence": "src/data.py",
+      "expected": "torchvision.datasets.CIFAR10 train=True",
+      "required_action": "",
+      "requirement": "CIFAR-10 dataset",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "classwise seeded split with size and disjointness assertions",
+      "evidence": "src/data.py",
+      "expected": "45,000 train / 5,000 validation, disjoint",
+      "required_action": "",
+      "requirement": "Frozen split",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "get_test_loader requires final_evaluation=True; trainers do not import it",
+      "evidence": "src/data.py; scripts/train_student_*.py",
+      "expected": "test inaccessible during research",
+      "required_action": "",
+      "requirement": "Test firewall",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "RandomCrop, RandomHorizontalFlip, CIFAR mean/std",
+      "evidence": "src/data.py",
+      "expected": "32x32 crop/flip train and normalized deterministic validation",
+      "required_action": "",
+      "requirement": "CIFAR preprocessing",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "3x3 stride-1 stem, no max pool, AdaptiveAvgPool, 10-class FC",
+      "evidence": "src/models/resnet_cifar.py",
+      "expected": "CIFAR-compatible ResNet-18/34, 10 outputs",
+      "required_action": "",
+      "requirement": "CIFAR ResNet architecture",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "loader sets eval and freezes all parameters; trainer asserts freeze",
+      "evidence": "src/kd/teacher.py; scripts/train_student_vanilla_kd.py",
+      "expected": "eval, requires_grad=False, no optimizer inclusion",
+      "required_action": "",
+      "requirement": "Teacher freeze",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "log_softmax(student/T), softmax(teacher/T), batchmean, T^2",
+      "evidence": "src/kd/losses.py",
+      "expected": "(1-lambda)CE + lambda*T^2*KL(teacher||student)",
+      "required_action": "",
+      "requirement": "Vanilla KD formula",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "TernaryConv2d/TernaryLinear quantize latent weights inside forward",
+      "evidence": "src/quant/ternary.py",
+      "expected": "all Conv/Linear forward weights ternary",
+      "required_action": "",
+      "requirement": "Ternary forward QAT",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "layer.weight is trainable latent; quantized tensor passed to conv/linear",
+      "evidence": "src/quant/ternary.py",
+      "expected": "optimizer updates latent FP32; forward uses deployed",
+      "required_action": "",
+      "requirement": "Latent/deployed separation",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "default conversion replaces all Conv2d/Linear; official config false exclusion",
+      "evidence": "src/quant/ternary.py; configs/ternary/resnet18_ternary_noKD.yaml",
+      "expected": "first Conv and final FC ternary",
+      "required_action": "",
+      "requirement": "First/final layer coverage",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "custom autograd hard code forward and identity/clipped gradient backward",
+      "evidence": "src/quant/ste.py",
+      "expected": "nonzero backward path with documented clipping",
+      "required_action": "",
+      "requirement": "STE",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": "set_seed seeds Python/NumPy/Torch/CUDA; configs and split manifest saved",
+      "evidence": "src/training/utils.py; src/data.py",
+      "expected": "seed/config/split/runtime recorded",
+      "required_action": "strict_determinism is false for final runs; report this limitation",
+      "requirement": "Reproducibility",
+      "severity": "minor",
+      "status": "PASS"
+    },
+    {
+      "actual": "root ternary.py duplicates src/quant/ternary.py but production imports src.quant; deprecated marker present=True",
+      "evidence": "ternary.py; scripts/train_student_*.py",
+      "expected": "single authoritative implementation",
+      "required_action": "",
+      "requirement": "Duplicate legacy quantizer",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "mean": 0.9533999999999999,
+        "sample_std": 0.0014000000000000123,
+        "values": [
+          0.9534,
+          0.9548,
+          0.952
+        ]
+      },
+      "evidence": "results/best_models/task2_b1_fp32_resnet18_best.pth",
+      "expected": "recomputed raw seed values equal summary",
+      "required_action": "",
+      "requirement": "Task 2 mean/std",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "mean": 0.9520666666666666,
+        "sample_std": 0.0008082903768654466,
+        "values": [
+          0.9512,
+          0.9522,
+          0.9528
+        ]
+      },
+      "evidence": "/home/vu-lab03-pc17/ATDL-1/results/best_models/task3_b2_default_best.pth",
+      "expected": "recomputed raw seed values equal summary",
+      "required_action": "",
+      "requirement": "Task 3 mean/std",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "mean": 0.9488,
+        "sample_std": 0.0015999999999999903,
+        "values": [
+          0.9504,
+          0.9472,
+          0.9488
+        ]
+      },
+      "evidence": "/home/vu-lab03-pc17/ATDL-1/results/task4/best_models/task5_dkd_final_t2_lam09_a1_b8_r1_best.pth",
+      "expected": "recomputed raw seed values equal summary",
+      "required_action": "",
+      "requirement": "DKD mean/std",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "mean": 0.9494,
+        "sample_std": 0.0,
+        "values": [
+          0.9494
+        ]
+      },
+      "evidence": "/home/vu-lab03-pc17/ATDL-1/results/task4/best_models/task6_dist_screen_t2_lam09_i1_a1_r1_best.pth",
+      "expected": "recomputed raw seed values equal summary",
+      "required_action": "",
+      "requirement": "DIST mean/std",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "aggregate_artifact": [
+          "task4_b3_final_t2_lam09_rerun1/seed42",
+          "task4_b3_final_t2_lam09_remaining_rerun1/seed43",
+          "task4_b3_final_t2_lam09_remaining_rerun1/seed44"
+        ],
+        "mean": 0.9512,
+        "sample_std": 0.0015099668870541527,
+        "values": [
+          0.9514,
+          0.9496,
+          0.9526
+        ]
+      },
+      "evidence": "results/task4/task4_b3_final_t2_lam09_aggregate_summary.json",
+      "expected": "seed 42 anchor + seeds 43/44 raw values",
+      "required_action": "",
+      "requirement": "Task 4 aggregate",
+      "severity": "critical",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "arch": "ResNet18-CIFAR-ternary",
+        "best_accuracy": 0.9528,
+        "checkpoint": "experiments/checkpoints/task3_b2_default/resnet18_ternary_seed44.pth",
+        "compression": 20.18975211428664,
+        "epoch": 171,
+        "finite_output": true,
+        "layer_coverage": true,
+        "output_shape": [
+          2,
+          10
+        ],
+        "sha256": "9c5e14a9caee70e22cd1a6eb7d86d40c1af0a4edd6cc347e2e4fa62595c27c27",
+        "sparsity": 0.4711684117448106,
+        "ternary": true
+      },
+      "evidence": "experiments/checkpoints/task3_b2_default/resnet18_ternary_seed44.pth",
+      "expected": "load, output [2,10], finite, strict ternary",
+      "required_action": "",
+      "requirement": "Ternary checkpoint reload",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "arch": "ResNet18-CIFAR-ternary",
+        "best_accuracy": 0.9514,
+        "checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_rerun1/resnet18_ternary_kd_seed42.pth",
+        "compression": 20.18975211428664,
+        "epoch": 158,
+        "finite_output": true,
+        "layer_coverage": true,
+        "output_shape": [
+          2,
+          10
+        ],
+        "sha256": "ef5dbcb74bafdb367d817c8bc1d87684f8f3d9439a05cfa922683d4ae3775ea2",
+        "sparsity": 0.47752354995614615,
+        "ternary": true
+      },
+      "evidence": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_rerun1/resnet18_ternary_kd_seed42.pth",
+      "expected": "load, output [2,10], finite, strict ternary",
+      "required_action": "",
+      "requirement": "Ternary checkpoint reload",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "arch": "ResNet18-CIFAR-ternary",
+        "best_accuracy": 0.9526,
+        "checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth",
+        "compression": 20.18975211428664,
+        "epoch": 182,
+        "finite_output": true,
+        "layer_coverage": true,
+        "output_shape": [
+          2,
+          10
+        ],
+        "sha256": "3767ff3fc95eedd562dc3a28b7c9326a8c3a57256a96d5bdbc161901045ab242",
+        "sparsity": 0.4767321023199555,
+        "ternary": true
+      },
+      "evidence": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth",
+      "expected": "load, output [2,10], finite, strict ternary",
+      "required_action": "",
+      "requirement": "Ternary checkpoint reload",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "arch": "ResNet18-CIFAR-ternary",
+        "best_accuracy": 0.9504,
+        "checkpoint": "experiments/task4/checkpoints/task5_dkd_final_t2_lam09_a1_b8_r1/resnet18_ternary_kd_seed42.pth",
+        "compression": 20.18975211428664,
+        "epoch": 175,
+        "finite_output": true,
+        "layer_coverage": true,
+        "output_shape": [
+          2,
+          10
+        ],
+        "sha256": "fdf66d7aaa8f9ef7abee172baa4eb5062ea8e403fa5478c5e1fd619e1ae1abf9",
+        "sparsity": 0.49883504210544416,
+        "ternary": true
+      },
+      "evidence": "experiments/task4/checkpoints/task5_dkd_final_t2_lam09_a1_b8_r1/resnet18_ternary_kd_seed42.pth",
+      "expected": "load, output [2,10], finite, strict ternary",
+      "required_action": "",
+      "requirement": "Ternary checkpoint reload",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "arch": "ResNet18-CIFAR-ternary",
+        "best_accuracy": 0.9494,
+        "checkpoint": "experiments/task4/checkpoints/task6_dist_screen_t2_lam09_i1_a1_r1/resnet18_ternary_kd_seed42.pth",
+        "compression": 20.18975211428664,
+        "epoch": 49,
+        "finite_output": true,
+        "layer_coverage": true,
+        "output_shape": [
+          2,
+          10
+        ],
+        "sha256": "f5ff49ed2bb8c8570ed239298653e93d10cafb6bc5a63c59f2f5374bb1701758",
+        "sparsity": 0.4625310094128168,
+        "ternary": true
+      },
+      "evidence": "experiments/task4/checkpoints/task6_dist_screen_t2_lam09_i1_a1_r1/resnet18_ternary_kd_seed42.pth",
+      "expected": "load, output [2,10], finite, strict ternary",
+      "required_action": "",
+      "requirement": "Ternary checkpoint reload",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "arch": "ResNet34-CIFAR",
+        "best_accuracy": null,
+        "finite": true,
+        "sha256": "ed19ff5fa0870ea3979377e869a0da508ebe03a78456d528eb2810b972badef6",
+        "shape": [
+          2,
+          10
+        ]
+      },
+      "evidence": "resnet34_cifar10_fp32_best.pth; src/kd/teacher.py",
+      "expected": "ResNet34 CIFAR, 10 outputs, eval/frozen",
+      "required_action": "",
+      "requirement": "Teacher checkpoint reload",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "required_tokens": true,
+        "rows": 6
+      },
+      "evidence": "report/final/final_comparison.json; report/final/final_validation_report.md",
+      "expected": "report contains actual values and test-lock statement",
+      "required_action": "",
+      "requirement": "Report consistency",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "ablation": true,
+        "architecture": true,
+        "limitations": true,
+        "references": true
+      },
+      "evidence": "report/final/final_validation_report.md",
+      "expected": "architecture, ablation, citations, limitations",
+      "required_action": "",
+      "requirement": "Report rubric coverage",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "cells": 19,
+        "compile_error": null
+      },
+      "evidence": "ATDL_post_task4_end_to_end_research.ipynb",
+      "expected": "all code cells compile",
+      "required_action": "",
+      "requirement": "Notebook clean compilation",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "file": "scripts/train_student_fp32.py",
+        "matches": []
+      },
+      "evidence": "scripts/train_student_fp32.py",
+      "expected": "no test access",
+      "required_action": "",
+      "requirement": "Research trainer test firewall",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "file": "scripts/train_student_ternary.py",
+        "matches": []
+      },
+      "evidence": "scripts/train_student_ternary.py",
+      "expected": "no test access",
+      "required_action": "",
+      "requirement": "Research trainer test firewall",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "file": "scripts/train_student_vanilla_kd.py",
+        "matches": []
+      },
+      "evidence": "scripts/train_student_vanilla_kd.py",
+      "expected": "no test access",
+      "required_action": "",
+      "requirement": "Research trainer test firewall",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "file": "scripts/run_unified_end_to_end.py",
+        "matches": []
+      },
+      "evidence": "scripts/run_unified_end_to_end.py",
+      "expected": "no test access",
+      "required_action": "",
+      "requirement": "Research trainer test firewall",
+      "severity": "none",
+      "status": "PASS"
+    },
+    {
+      "actual": {
+        "stale_files": []
+      },
+      "evidence": "README.md; src/README.md",
+      "expected": "README reflects completed Tasks 2-4",
+      "required_action": "",
+      "requirement": "Documentation current-state accuracy",
+      "severity": "none",
+      "status": "PASS"
+    }
+  ]
+}

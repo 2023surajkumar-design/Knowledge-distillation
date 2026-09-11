@@ -1,0 +1,32 @@
+PASS [none] CIFAR-10 dataset: CIFAR10 train=True and 10 classes
+PASS [none] Frozen split: classwise seeded split with size and disjointness assertions
+PASS [none] Test firewall: get_test_loader requires final_evaluation=True; trainers do not import it
+PASS [none] CIFAR preprocessing: RandomCrop, RandomHorizontalFlip, CIFAR mean/std
+PASS [none] CIFAR ResNet architecture: 3x3 stride-1 stem, no max pool, AdaptiveAvgPool, 10-class FC
+PASS [none] Teacher freeze: loader sets eval and freezes all parameters; trainer asserts freeze
+PASS [none] Vanilla KD formula: log_softmax(student/T), softmax(teacher/T), batchmean, T^2
+PASS [none] Ternary forward QAT: TernaryConv2d/TernaryLinear quantize latent weights inside forward
+PASS [none] Latent/deployed separation: layer.weight is trainable latent; quantized tensor passed to conv/linear
+PASS [none] First/final layer coverage: default conversion replaces all Conv2d/Linear; official config false exclusion
+PASS [none] STE: custom autograd hard code forward and identity/clipped gradient backward
+PASS [minor] Reproducibility: set_seed seeds Python/NumPy/Torch/CUDA; configs and split manifest saved
+PASS [none] Duplicate legacy quantizer: root ternary.py duplicates src/quant/ternary.py but production imports src.quant; deprecated marker present=True
+PASS [none] Task 2 mean/std: {'values': [0.9534, 0.9548, 0.952], 'mean': 0.9533999999999999, 'sample_std': 0.0014000000000000123}
+PASS [none] Task 3 mean/std: {'values': [0.9512, 0.9522, 0.9528], 'mean': 0.9520666666666666, 'sample_std': 0.0008082903768654466}
+PASS [none] DKD mean/std: {'values': [0.9504, 0.9472, 0.9488], 'mean': 0.9488, 'sample_std': 0.0015999999999999903}
+PASS [none] DIST mean/std: {'values': [0.9494], 'mean': 0.9494, 'sample_std': 0.0}
+PASS [critical] Task 4 aggregate: {'values': [0.9514, 0.9496, 0.9526], 'mean': 0.9512, 'sample_std': 0.0015099668870541527, 'aggregate_artifact': ['task4_b3_final_t2_lam09_rerun1/seed42', 'task4_b3_final_t2_lam09_remaining_rerun1/seed43', 'task4_b3_final_t2_lam09_remaining_rerun1/seed44']}
+PASS [none] Ternary checkpoint reload: {'checkpoint': 'experiments/checkpoints/task3_b2_default/resnet18_ternary_seed44.pth', 'sha256': '9c5e14a9caee70e22cd1a6eb7d86d40c1af0a4edd6cc347e2e4fa62595c27c27', 'arch': 'ResNet18-CIFAR-ternary', 'epoch': 171, 'best_accuracy': 0.9528, 'output_shape': [2, 10], 'finite_output': True, 'ternary': True, 'layer_coverage': True, 'sparsity': 0.4711684117448106, 'compression': 20.18975211428664}
+PASS [none] Ternary checkpoint reload: {'checkpoint': 'experiments/task4/checkpoints/task4_b3_final_t2_lam09_rerun1/resnet18_ternary_kd_seed42.pth', 'sha256': 'ef5dbcb74bafdb367d817c8bc1d87684f8f3d9439a05cfa922683d4ae3775ea2', 'arch': 'ResNet18-CIFAR-ternary', 'epoch': 158, 'best_accuracy': 0.9514, 'output_shape': [2, 10], 'finite_output': True, 'ternary': True, 'layer_coverage': True, 'sparsity': 0.47752354995614615, 'compression': 20.18975211428664}
+PASS [none] Ternary checkpoint reload: {'checkpoint': 'experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth', 'sha256': '3767ff3fc95eedd562dc3a28b7c9326a8c3a57256a96d5bdbc161901045ab242', 'arch': 'ResNet18-CIFAR-ternary', 'epoch': 182, 'best_accuracy': 0.9526, 'output_shape': [2, 10], 'finite_output': True, 'ternary': True, 'layer_coverage': True, 'sparsity': 0.4767321023199555, 'compression': 20.18975211428664}
+PASS [none] Ternary checkpoint reload: {'checkpoint': 'experiments/task4/checkpoints/task5_dkd_final_t2_lam09_a1_b8_r1/resnet18_ternary_kd_seed42.pth', 'sha256': 'fdf66d7aaa8f9ef7abee172baa4eb5062ea8e403fa5478c5e1fd619e1ae1abf9', 'arch': 'ResNet18-CIFAR-ternary', 'epoch': 175, 'best_accuracy': 0.9504, 'output_shape': [2, 10], 'finite_output': True, 'ternary': True, 'layer_coverage': True, 'sparsity': 0.49883504210544416, 'compression': 20.18975211428664}
+PASS [none] Ternary checkpoint reload: {'checkpoint': 'experiments/task4/checkpoints/task6_dist_screen_t2_lam09_i1_a1_r1/resnet18_ternary_kd_seed42.pth', 'sha256': 'f5ff49ed2bb8c8570ed239298653e93d10cafb6bc5a63c59f2f5374bb1701758', 'arch': 'ResNet18-CIFAR-ternary', 'epoch': 49, 'best_accuracy': 0.9494, 'output_shape': [2, 10], 'finite_output': True, 'ternary': True, 'layer_coverage': True, 'sparsity': 0.4625310094128168, 'compression': 20.18975211428664}
+PASS [none] Teacher checkpoint reload: {'arch': 'ResNet34-CIFAR', 'best_accuracy': None, 'shape': [2, 10], 'finite': True, 'sha256': 'ed19ff5fa0870ea3979377e869a0da508ebe03a78456d528eb2810b972badef6'}
+PASS [none] Report consistency: {'rows': 6, 'required_tokens': True}
+PASS [none] Report rubric coverage: {'architecture': True, 'ablation': True, 'references': True, 'limitations': True}
+PASS [none] Notebook clean compilation: {'cells': 19, 'compile_error': None}
+PASS [none] Research trainer test firewall: {'file': 'scripts/train_student_fp32.py', 'matches': []}
+PASS [none] Research trainer test firewall: {'file': 'scripts/train_student_ternary.py', 'matches': []}
+PASS [none] Research trainer test firewall: {'file': 'scripts/train_student_vanilla_kd.py', 'matches': []}
+PASS [none] Research trainer test firewall: {'file': 'scripts/run_unified_end_to_end.py', 'matches': []}
+PASS [none] Documentation current-state accuracy: {'stale_files': []}

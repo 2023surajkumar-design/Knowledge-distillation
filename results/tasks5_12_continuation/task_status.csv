@@ -1,0 +1,12 @@
+task,status,evidence,result
+T5 DKD,completed/rejected,results/task4/task5_dkd_final_t2_lam09_a1_b8_r1_summary.json,94.88% mean; below Task 4
+T5 DIST,completed/screening,results/task4/task6_dist_screen_t2_lam09_i1_a1_r1_summary.json,94.94%; below Task 4
+T5 DIST continuation,completed/provisional negative,results/task4/task7_dist_t1_lam05_r1_summary.json,95.02%; below Task 4 mean
+T5 FitNet / Attention / RKD,deferred,production trainer has no supported modes,not fabricated
+T6 QFD / QTRD,deferred,production trainer has no supported modes,not fabricated
+T7 STE study,deferred,no separate production continuation artifact,not fabricated
+T8 progressive QAT,deferred,no production progressive trainer,not fabricated
+T9 adaptive KD,deferred,no production adaptive trainer,not fabricated
+T10 gradient analysis,diagnostics loaded,preserved Task 4/DKD/DIST diagnostics,explanatory only
+T11 ablation matrix,partially completed,preserved Task 4 T/lambda screening,validation-only
+T12 compression,completed,report/final/compression_analysis.json,theoretical only

@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-11T11:43:01.877750+05:30",
-  "run_mode": "TIME-CONSTRAINED FINALIZATION",
+  "timestamp": "2026-09-11T13:19:34.856988+05:30",
+  "run_mode": "FINAL_NOTEBOOK_ONE_SEED_SCREENS",
   "completed_tasks": [
     "Task 1",
     "Task 2",
@@ -35,7 +35,7 @@
   "automl_status": "PAUSED_NOT_ABANDONED",
   "research_ledger": "research_db/experiments.jsonl",
   "test_evaluation": "LOCKED_NOT_RUN",
-  "next_experiment_after_completion": "Resume deep research with a separately reviewed one-seed experiment.",
+  "next_experiment_after_completion": "Review one-seed QFD/AT/RKD evidence; do not promote a screen to final without independent confirmation.",
   "dkd_shortlist": {
     "candidate": {
       "43": 0.9468,
@@ -72,16 +72,33 @@
     "official_test": "LOCKED_NOT_RUN",
     "next_step": "Resume deep research with a separately reviewed one-seed experiment."
   },
-  "notebook": "ATDL_post_task4_end_to_end_research.ipynb",
+  "notebook": "final.ipynb",
   "methods_executed": [
     "Task 3",
     "vanilla Task 4",
     "DKD confirmation",
     "DIST smoke",
-    "DIST screen"
+    "DIST screen",
+    "DIST T=1 lambda=0.5 one-seed continuation"
   ],
   "methods_skipped": {
-    "new_training": "No remaining implemented method has evidence above the completed Task 4 control."
+    "new_training": "QTRD, QFD, attention transfer, and RKD are not implemented in the production trainer and were deferred rather than fabricated."
+  },
+  "new_candidate": {
+    "method": "DIST",
+    "configuration": "configs/kd/resnet18_ternary_dist_t1_lam05_continuation.yaml",
+    "seed": 42,
+    "validation_accuracy": 0.9502,
+    "best_epoch": 48,
+    "status": "PROVISIONAL_NEGATIVE_BELOW_TASK4",
+    "checkpoint": "experiments/task4/checkpoints/task7_dist_t1_lam05_r1/resnet18_ternary_kd_seed42.pth",
+    "history": "experiments/task4/histories/task7_dist_t1_lam05_r1/seed42.json",
+    "diagnostics": "experiments/task4/diagnostics/task7_dist_t1_lam05_r1/seed42.json",
+    "all_ternary": true,
+    "checkpoint_reload_accuracy_delta": 0.0,
+    "sparsity": 0.4572853847675172,
+    "quantization_error_mean": 0.5277959804069313,
+    "test_evaluation": "not_run"
   },
   "future_resumption_point": "Review and authorize one new supported one-seed method; preserve the test firewall and append artifacts.",
   "report_artifacts": {
@@ -101,5 +118,27 @@
     "layer_quantization": "available in quant_diagnostics where logged",
     "representation_similarity": "unavailable; not logged in preserved runs",
     "official_test": "locked and not accessed"
-  }
+  },
+  "final_notebook_screens": {
+    "qfd": {
+      "validation_mean": 0.95,
+      "validation_best": 0.95,
+      "summary": "results/task4/task8_qfd_screen_t2_lam09_aux1_r1_summary.json",
+      "status": "one_seed_provisional"
+    },
+    "at": {
+      "validation_mean": 0.9502,
+      "validation_best": 0.9502,
+      "summary": "results/task4/task9_at_screen_t2_lam09_aux1_r1_summary.json",
+      "status": "one_seed_provisional"
+    },
+    "rkd": {
+      "validation_mean": 0.9512,
+      "validation_best": 0.9512,
+      "summary": "results/task4/task10_rkd_screen_t2_lam09_aux1_r1_summary.json",
+      "status": "one_seed_provisional"
+    }
+  },
+  "final_notebook_best_screen": "rkd",
+  "final_notebook_decision": "Task-4 vanilla KD remains final control unless a separately authorized confirmation is run."
 }

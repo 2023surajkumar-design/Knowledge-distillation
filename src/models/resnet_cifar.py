@@ -64,7 +64,7 @@ class ResNetCIFAR(nn.Module):
                 nn.init.normal_(module.weight, 0, 0.01)
                 nn.init.constant_(module.bias, 0)
 
-    def forward(self, x: torch.Tensor):
+    def forward(self, x: torch.Tensor, return_features: bool | None = None):
         out = F.relu(self.bn1(self.conv1(x)))
         f1 = self.layer1(out)
         f2 = self.layer2(f1)
@@ -72,7 +72,7 @@ class ResNetCIFAR(nn.Module):
         f4 = self.layer4(f3)
         penultimate = torch.flatten(self.avgpool(f4), 1)
         logits = self.fc(penultimate)
-        if self.return_features:
+        if self.return_features if return_features is None else return_features:
             return logits, {"f1": f1, "f2": f2, "f3": f3, "f4": f4, "penultimate": penultimate}
         return logits
 

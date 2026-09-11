@@ -1,0 +1,87 @@
+{
+  "all_conv_and_fc_ternary": true,
+  "architecture": "ResNet18-CIFAR-ternary",
+  "best_checkpoint": "/home/vu-lab03-pc17/ATDL-1/results/task4/best_models/task10_rkd_smoke_r1_best.pth",
+  "best_seed": 42,
+  "condition": "T8-RKD-smoke",
+  "dkd_alpha": 1.0,
+  "dkd_beta": 1.0,
+  "epochs": 1,
+  "kd_lambda": 0.9,
+  "kd_mode": "rkd",
+  "note": "Validation-only strict ternary QAT; no test loader is imported.",
+  "per_seed": [
+    {
+      "all_ternary": true,
+      "best_epoch": 1,
+      "best_validation_accuracy": 0.9124,
+      "checkpoint": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/checkpoints/task10_rkd_smoke_r1/resnet18_ternary_kd_seed42.pth",
+      "checkpoint_reload_accuracy_delta": 0.0,
+      "elapsed_seconds": 18.37118848299724,
+      "final_augmented_train_accuracy": 0.974,
+      "final_validation_accuracy": 0.9124,
+      "history": "/home/vu-lab03-pc17/ATDL-1/experiments/task4/histories/task10_rkd_smoke_r1/seed42.json",
+      "plots": [
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task10_rkd_smoke_r1/seed42_loss.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task10_rkd_smoke_r1/seed42_acc.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task10_rkd_smoke_r1/seed42_gap.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task10_rkd_smoke_r1/seed42_lr.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task10_rkd_smoke_r1/seed42_contributions.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task10_rkd_smoke_r1/seed42_gradient.png",
+        "/home/vu-lab03-pc17/ATDL-1/plots/task4/task10_rkd_smoke_r1/seed42_gradient_cosine.png"
+      ],
+      "quant_error_mean": 0.500861997154438,
+      "seconds_per_epoch": 18.37118848299724,
+      "seed": 42,
+      "sparsity": 0.45466185587842445,
+      "validation_kd_diagnostics": {
+        "agreement": 0.9202,
+        "ce": 0.7227638835906982,
+        "kd": 0.49061889934539793,
+        "student_confidence": 0.8586267827987671,
+        "student_correct": 0.9124,
+        "student_entropy": 0.6436823068618774,
+        "student_margin": 0.8214362410545349,
+        "teacher_confidence": 0.8974391421318054,
+        "teacher_correct": 0.9554,
+        "teacher_entropy": 0.5315583398818969,
+        "teacher_margin": 0.8771539717674255
+      }
+    }
+  ],
+  "quant_config": {
+    "clip": 1.0,
+    "scale": "derived",
+    "scope": "per_channel",
+    "ste": "clipped",
+    "symmetric": true,
+    "t": 0.05,
+    "threshold": "twn",
+    "twn_factor": 0.7
+  },
+  "run_name": "task10_rkd_smoke_r1",
+  "sparsity_mean": 0.45466185587842445,
+  "task": "T4",
+  "teacher": {
+    "arch": "ResNet34-CIFAR",
+    "best_validation_accuracy": 0.9554,
+    "device": "cuda",
+    "mode": "eval",
+    "parameter_count": 21282122,
+    "path": "resnet34_cifar10_fp32_best.pth",
+    "requires_grad_any": false,
+    "selection_metric": null,
+    "sha256": "ed19ff5fa0870ea3979377e869a0da508ebe03a78456d528eb2810b972badef6"
+  },
+  "temperature": 2.0,
+  "test_evaluation": "not_run",
+  "test_mean": null,
+  "test_std": null,
+  "training_seeds": [
+    42
+  ],
+  "validation_best": 0.9124,
+  "validation_mean": 0.9124,
+  "validation_std": 0.0,
+  "warm_start": "results/best_models/task2_b1_fp32_resnet18_best.pth"
+}

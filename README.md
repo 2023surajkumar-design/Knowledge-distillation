@@ -1,6 +1,6 @@
 # ATDL Task 1 — FP32 CIFAR-10 ResNet34 Teacher
 
-The implemented research baseline is Task 1 only: a CIFAR-adapted, randomly initialized FP32 ResNet34 trained on CIFAR-10. It contains no implemented knowledge distillation, ResNet18 student, ternarization, or QAT yet. The task-gated project scaffold and full baseline audit are in [`AUDIT.md`](AUDIT.md); [`KD.md`](KD.md) is the authoritative staged execution plan.
+The project now includes completed Task 1 through Task 4 implementations and preserved validation artifacts: FP32 ResNet34 teacher, FP32 ResNet18 baseline, strict ternary ResNet18 QAT without KD, and vanilla ternary KD. DKD and DIST are supplementary validation-only experiments. The official test set remains locked in the research phase.
 
 ## CUDA environment
 
@@ -13,7 +13,7 @@ bash setup_cuda_env.sh
 ```
 
 This creates `.venv`, installs the pinned CUDA training dependencies from `requirements-cuda.txt`, registers the `Python (ATDL Task 1 CUDA)` kernel, and verifies GPU visibility. `requirements-lock.txt` captures the fully resolved environment used for this run.
-
+The completed Task 1 run produced:
 `pyproject.toml` and `uv.lock` provide the forward-looking reproducibility manifest for the staged project. Do not run `uv sync` over the completed Task 1 environment unless deliberately recreating it; use `uv lock --check` to verify the lock without modifying the environment.
 
 Run the notebook with that kernel:
@@ -37,4 +37,14 @@ The final checkpoint has a 10-class CIFAR ResNet34 model state, the training con
 
 ## Project layout and task gate
 
-The directories `src/`, `configs/`, `checkpoints/`, `results/`, `plots/`, `hpo/`, `autoresearch/`, and `report/` are intentionally prepared but empty of future-task code. `KD.md` requires implementing and validating one task at a time; the next permitted implementation stage is Task 2 (the FP32 ResNet18 no-KD baseline).
+## Current completed state
+
+- Task 2 FP32 ResNet18: 95.34% +/- 0.14% validation.
+- Task 3 strict ternary ResNet18: 95.21% +/- 0.08% validation.
+- Task 4 vanilla ternary KD: 95.12% +/- 0.15% validation.
+- DKD: 94.88% three-seed mean, rejected as final candidate.
+- DIST: 94.94% one-seed screen, screening-only.
+- Final report: `report/final/final_validation_report.pdf`.
+- Forensic audit: `final_correctness_audit.md`.
+
+The directories `src/`, `configs/`, `results/`, `plots/`, `hpo/`, `autoresearch/`, and `report/` contain the staged implementations and preserved artifacts. `KD.md` remains the authoritative research roadmap; future extensions must preserve the completed Task 1-4 evidence.
