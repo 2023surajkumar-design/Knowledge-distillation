@@ -1,0 +1,904 @@
+{
+  "purpose": "qualitative out-of-distribution web-image inference; not a benchmark and not used for model selection",
+  "models": {
+    "Teacher ResNet34": "resnet34_cifar10_fp32_best.pth",
+    "FP32 ResNet18": "results/best_models/task2_b1_fp32_resnet18_best.pth",
+    "Ternary ResNet18 no KD": "results/best_models/task3_b2_default_best.pth",
+    "Vanilla ternary KD control": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth",
+    "QTRD exploratory": "results/task4/best_models/task11_qtrd_finaltwo_screen_t2_lam09_aux1_r1_best.pth"
+  },
+  "images": [
+    {
+      "label": "airplane",
+      "query": "airplane flying",
+      "file": "results/web_image_qualitative/images/airplane.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=180160048",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/%22Inf%C3%A2ncia%22_sculpture_%28Samuel_Torres_de_Carvalho%2C_1993%29_with_an_airplane_flying_overhead%2C_Jardim_M%C3%A1rio_Soares%2C_Lisbon%2C_Portugal_julesvernex2.jpg/960px-%22Inf%C3%A2ncia%22_sculpture_%28Samuel_Torres_de_Carvalho%2C_1993%29_with_an_airplane_flying_overhead%2C_Jardim_M%C3%A1rio_Soares%2C_Lisbon%2C_Portugal_julesvernex2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:\"Inf\u00e2ncia\" sculpture (Samuel Torres de Carvalho, 1993) with an airplane flying overhead, Jardim M\u00e1rio Soares, Lisbon, Portugal julesvernex2.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Julesvernex2\" title=\"User:Julesvernex2\">Jules Verne Times Two</a>",
+      "credit": "<ul><li>Own work</li>\n<li><a rel=\"nofollow\" class=\"external free\" href=\"https://julesvernex2.com\">https://julesvernex2.com</a></li></ul>"
+    },
+    {
+      "label": "automobile",
+      "query": "automobile car",
+      "file": "results/web_image_qualitative/images/automobile.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=17226541",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/A_Brouhot_car_in_Paris%2C_1910.jpg/960px-A_Brouhot_car_in_Paris%2C_1910.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:A Brouhot car in Paris, 1910.jpg",
+      "license": "Public domain",
+      "artist": "Alexandre Louis",
+      "credit": "Album de photo de Marcel Louis"
+    },
+    {
+      "label": "bird",
+      "query": "bird",
+      "file": "results/web_image_qualitative/images/bird.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=64634352",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Asian_pied_starlings_%28Gracupica_contra%29.jpg/960px-Asian_pied_starlings_%28Gracupica_contra%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:Asian pied starlings (Gracupica contra).jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<bdi><a href=\"https://www.wikidata.org/wiki/Q54800218\" class=\"extiw\" title=\"d:Q54800218\"><span title=\"Scottish wildlife photographer\">Charles J. Sharp</span></a></bdi>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://www.sharpphotography.co.uk/\">Sharp Photography, sharpphotography.co.uk</a>"
+    },
+    {
+      "label": "cat",
+      "query": "cat",
+      "file": "results/web_image_qualitative/images/cat.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=141562823",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/20231125_housecat_south_meadows_PD100306.jpg/960px-20231125_housecat_south_meadows_PD100306.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:20231125 housecat south meadows PD100306.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Pdanese\" title=\"User:Pdanese\">Paul Danese</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "deer",
+      "query": "deer",
+      "file": "results/web_image_qualitative/images/deer.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=120575235",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/014_Wild_Red_Deer_Switzerland_Photo_by_Giles_Laurent.jpg/960px-014_Wild_Red_Deer_Switzerland_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:014 Wild Red Deer Switzerland Photo by Giles Laurent.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>"
+    },
+    {
+      "label": "dog",
+      "query": "dog",
+      "file": "results/web_image_qualitative/images/dog.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=15170790",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/20110425_German_Shepherd_Dog_8505.jpg/960px-20110425_German_Shepherd_Dog_8505.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:20110425 German Shepherd Dog 8505.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Jakubhal\" title=\"User:Jakubhal\">Jakub Ha\u0142un</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "frog",
+      "query": "frog",
+      "file": "results/web_image_qualitative/images/frog.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=63042749",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Agile_frog_%28Rana_dalmatina%29.jpg/960px-Agile_frog_%28Rana_dalmatina%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:Agile frog (Rana dalmatina).jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:PetarM\" title=\"User:PetarM\">Petar Milo\u0161evi\u0107</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "horse",
+      "query": "horse",
+      "file": "results/web_image_qualitative/images/horse.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=35770",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/04-09-12-Schaupfl%C3%BCgen-Fahrenwalde-RalfR-IMG_1232.jpg/960px-04-09-12-Schaupfl%C3%BCgen-Fahrenwalde-RalfR-IMG_1232.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:04-09-12-Schaupfl\u00fcgen-Fahrenwalde-RalfR-IMG 1232.jpg",
+      "license": "CC BY-SA 2.5",
+      "artist": "<bdi><a href=\"https://www.wikidata.org/wiki/Q15080600\" class=\"extiw\" title=\"d:Q15080600\"><span title=\"German civil engineer and photographer\">Ralf Roletschek</span></a></bdi>",
+      "credit": "<div style=\"display:table;width:auto;vertical-align:middle;direction:ltr;float:left;line-height:22px;height:24px;font-size:.96em;margin:0px;padding:2px 4px 2px 6px;color:var(--color-base,#000);background:var(--background-color-neutral-subtle,#F8F9FA);border:1px solid #BAB;border-collapse:separate;border-spacing:0px;\"><span typeof=\"mw:File\"><a href=\"//commons.wikimedia.org/wiki/File:Applets-screenshooter.svg\" class=\"mw-file-description\"><img src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Applets-screenshooter.svg/40px-Applets-screenshooter.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"22\" height=\"22\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Applets-screenshooter.svg/60px-Applets-screenshooter.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"64\" data-file-height=\"64\"></a></span>\u00a0This <a href=\"https://en.wikipedia.org/wiki/photo\" class=\"extiw\" title=\"w:photo\">photo</a> was taken with Canon PowerShot G5</div> Transferred from the <a href=\"https://de.wikipedia.org/wiki/Wikipedia\" class=\"extiw\" title=\"de:Wikipedia\">de:Wp</a>. Original file is/was <span style=\"border:1px dotted #FC0;padding:0 4px\"><a href=\"https://de.wikipedia.org/wiki/File:Einscharpflug.jpg\" class=\"extiw\" title=\"de:File:Einscharpflug.jpg\">here</a></span>. (<a href=\"#Original_upload_log\">Original upload log</a> available below.)"
+    },
+    {
+      "label": "ship",
+      "query": "ship vessel",
+      "file": "results/web_image_qualitative/images/ship.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=106523094",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/2015-09-18_MS_OCEAN_ENDEAVOUR_-_IMO_7625811%2C_at_Qeqertarsuaq_Island_%28Karrat_Fjord%29%2C_Greenland.jpg/960px-2015-09-18_MS_OCEAN_ENDEAVOUR_-_IMO_7625811%2C_at_Qeqertarsuaq_Island_%28Karrat_Fjord%29%2C_Greenland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:2015-09-18 MS OCEAN ENDEAVOUR - IMO 7625811, at Qeqertarsuaq Island (Karrat Fjord), Greenland.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:GRDN711\" title=\"User:GRDN711\">Gordon Leggett</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "truck",
+      "query": "truck",
+      "file": "results/web_image_qualitative/images/truck.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=27799928",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/13-07-13_ADAC_Truck_GP_03.jpg/960px-13-07-13_ADAC_Truck_GP_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:13-07-13 ADAC Truck GP 03.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Achim_Raschka\" title=\"User:Achim Raschka\">Achim Raschka</a> (<a href=\"//commons.wikimedia.org/wiki/User_talk:Achim_Raschka\" title=\"User talk:Achim Raschka\"><span class=\"signature-talk\">talk</span></a>)",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    }
+  ],
+  "results": [
+    {
+      "label": "airplane",
+      "file": "results/web_image_qualitative/images/airplane.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=180160048",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "ship",
+            "probability": 0.6491051912307739
+          },
+          {
+            "class": "airplane",
+            "probability": 0.10019434243440628
+          },
+          {
+            "class": "truck",
+            "probability": 0.09653051197528839
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "ship",
+            "probability": 0.4113997519016266
+          },
+          {
+            "class": "airplane",
+            "probability": 0.29772689938545227
+          },
+          {
+            "class": "truck",
+            "probability": 0.08766023069620132
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "ship",
+            "probability": 0.485845148563385
+          },
+          {
+            "class": "truck",
+            "probability": 0.12426208704710007
+          },
+          {
+            "class": "bird",
+            "probability": 0.11429782956838608
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "ship",
+            "probability": 0.8039461970329285
+          },
+          {
+            "class": "truck",
+            "probability": 0.039457254111766815
+          },
+          {
+            "class": "airplane",
+            "probability": 0.03582048788666725
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "airplane",
+            "probability": 0.525161623954773
+          },
+          {
+            "class": "truck",
+            "probability": 0.28543388843536377
+          },
+          {
+            "class": "ship",
+            "probability": 0.03796851634979248
+          }
+        ]
+      }
+    },
+    {
+      "label": "automobile",
+      "file": "results/web_image_qualitative/images/automobile.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=17226541",
+      "license": "Public domain",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "automobile",
+            "probability": 0.9012631773948669
+          },
+          {
+            "class": "truck",
+            "probability": 0.014067600481212139
+          },
+          {
+            "class": "deer",
+            "probability": 0.012657495215535164
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "automobile",
+            "probability": 0.879426896572113
+          },
+          {
+            "class": "truck",
+            "probability": 0.034496746957302094
+          },
+          {
+            "class": "deer",
+            "probability": 0.01259950827807188
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "truck",
+            "probability": 0.6304467916488647
+          },
+          {
+            "class": "automobile",
+            "probability": 0.20606011152267456
+          },
+          {
+            "class": "deer",
+            "probability": 0.027436066418886185
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "automobile",
+            "probability": 0.9067039489746094
+          },
+          {
+            "class": "truck",
+            "probability": 0.0138741759583354
+          },
+          {
+            "class": "deer",
+            "probability": 0.0105799101293087
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "automobile",
+            "probability": 0.8886464238166809
+          },
+          {
+            "class": "truck",
+            "probability": 0.03007500059902668
+          },
+          {
+            "class": "bird",
+            "probability": 0.01100837904959917
+          }
+        ]
+      }
+    },
+    {
+      "label": "bird",
+      "file": "results/web_image_qualitative/images/bird.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=64634352",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "bird",
+            "probability": 0.9107319116592407
+          },
+          {
+            "class": "cat",
+            "probability": 0.010698197409510612
+          },
+          {
+            "class": "horse",
+            "probability": 0.010205011814832687
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "bird",
+            "probability": 0.9058877229690552
+          },
+          {
+            "class": "truck",
+            "probability": 0.011064375750720501
+          },
+          {
+            "class": "deer",
+            "probability": 0.010921616107225418
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "bird",
+            "probability": 0.9111338257789612
+          },
+          {
+            "class": "automobile",
+            "probability": 0.010261880233883858
+          },
+          {
+            "class": "cat",
+            "probability": 0.010168868117034435
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "bird",
+            "probability": 0.9102627038955688
+          },
+          {
+            "class": "cat",
+            "probability": 0.010508274659514427
+          },
+          {
+            "class": "horse",
+            "probability": 0.010326930321753025
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "bird",
+            "probability": 0.9119139313697815
+          },
+          {
+            "class": "cat",
+            "probability": 0.010963430628180504
+          },
+          {
+            "class": "truck",
+            "probability": 0.010624145157635212
+          }
+        ]
+      }
+    },
+    {
+      "label": "cat",
+      "file": "results/web_image_qualitative/images/cat.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=141562823",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "cat",
+            "probability": 0.6931599378585815
+          },
+          {
+            "class": "deer",
+            "probability": 0.14442935585975647
+          },
+          {
+            "class": "frog",
+            "probability": 0.03448973223567009
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "bird",
+            "probability": 0.4220074415206909
+          },
+          {
+            "class": "deer",
+            "probability": 0.1867169737815857
+          },
+          {
+            "class": "cat",
+            "probability": 0.15415143966674805
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "frog",
+            "probability": 0.42553678154945374
+          },
+          {
+            "class": "deer",
+            "probability": 0.16306522488594055
+          },
+          {
+            "class": "cat",
+            "probability": 0.16222445666790009
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "cat",
+            "probability": 0.7880021333694458
+          },
+          {
+            "class": "frog",
+            "probability": 0.0416129007935524
+          },
+          {
+            "class": "deer",
+            "probability": 0.03518834710121155
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "cat",
+            "probability": 0.4791596233844757
+          },
+          {
+            "class": "deer",
+            "probability": 0.22890731692314148
+          },
+          {
+            "class": "bird",
+            "probability": 0.09161236882209778
+          }
+        ]
+      }
+    },
+    {
+      "label": "deer",
+      "file": "results/web_image_qualitative/images/deer.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=120575235",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "deer",
+            "probability": 0.9085995554924011
+          },
+          {
+            "class": "bird",
+            "probability": 0.010883891023695469
+          },
+          {
+            "class": "cat",
+            "probability": 0.010258249007165432
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "deer",
+            "probability": 0.9090354442596436
+          },
+          {
+            "class": "cat",
+            "probability": 0.012562879361212254
+          },
+          {
+            "class": "truck",
+            "probability": 0.010602771304547787
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "deer",
+            "probability": 0.9093447327613831
+          },
+          {
+            "class": "bird",
+            "probability": 0.012803585268557072
+          },
+          {
+            "class": "cat",
+            "probability": 0.010587329044938087
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "deer",
+            "probability": 0.9092281460762024
+          },
+          {
+            "class": "cat",
+            "probability": 0.012651554308831692
+          },
+          {
+            "class": "bird",
+            "probability": 0.01021327544003725
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "deer",
+            "probability": 0.9059678316116333
+          },
+          {
+            "class": "bird",
+            "probability": 0.011634420603513718
+          },
+          {
+            "class": "cat",
+            "probability": 0.011227230541408062
+          }
+        ]
+      }
+    },
+    {
+      "label": "dog",
+      "file": "results/web_image_qualitative/images/dog.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=15170790",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "dog",
+            "probability": 0.9107153415679932
+          },
+          {
+            "class": "deer",
+            "probability": 0.012053149752318859
+          },
+          {
+            "class": "cat",
+            "probability": 0.010296615771949291
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "dog",
+            "probability": 0.9041619896888733
+          },
+          {
+            "class": "airplane",
+            "probability": 0.011170917190611362
+          },
+          {
+            "class": "deer",
+            "probability": 0.010912143625319004
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "dog",
+            "probability": 0.9044894576072693
+          },
+          {
+            "class": "deer",
+            "probability": 0.013595332391560078
+          },
+          {
+            "class": "truck",
+            "probability": 0.010724511928856373
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "dog",
+            "probability": 0.9098881483078003
+          },
+          {
+            "class": "deer",
+            "probability": 0.010749522596597672
+          },
+          {
+            "class": "ship",
+            "probability": 0.010221779346466064
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "dog",
+            "probability": 0.9091017246246338
+          },
+          {
+            "class": "automobile",
+            "probability": 0.01181835774332285
+          },
+          {
+            "class": "ship",
+            "probability": 0.010559042915701866
+          }
+        ]
+      }
+    },
+    {
+      "label": "frog",
+      "file": "results/web_image_qualitative/images/frog.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=63042749",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "frog",
+            "probability": 0.9024487733840942
+          },
+          {
+            "class": "bird",
+            "probability": 0.015483505092561245
+          },
+          {
+            "class": "cat",
+            "probability": 0.012318836525082588
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "frog",
+            "probability": 0.7201051115989685
+          },
+          {
+            "class": "cat",
+            "probability": 0.13091696798801422
+          },
+          {
+            "class": "dog",
+            "probability": 0.023630456998944283
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "frog",
+            "probability": 0.920578122138977
+          },
+          {
+            "class": "dog",
+            "probability": 0.010165381245315075
+          },
+          {
+            "class": "cat",
+            "probability": 0.00997381005436182
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "frog",
+            "probability": 0.9085301756858826
+          },
+          {
+            "class": "dog",
+            "probability": 0.013653513975441456
+          },
+          {
+            "class": "cat",
+            "probability": 0.011028576642274857
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "cat",
+            "probability": 0.8130779266357422
+          },
+          {
+            "class": "frog",
+            "probability": 0.07381902635097504
+          },
+          {
+            "class": "dog",
+            "probability": 0.017395703122019768
+          }
+        ]
+      }
+    },
+    {
+      "label": "horse",
+      "file": "results/web_image_qualitative/images/horse.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=35770",
+      "license": "CC BY-SA 2.5",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "horse",
+            "probability": 0.9081869721412659
+          },
+          {
+            "class": "airplane",
+            "probability": 0.010682586580514908
+          },
+          {
+            "class": "deer",
+            "probability": 0.010682469233870506
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "horse",
+            "probability": 0.9105319380760193
+          },
+          {
+            "class": "airplane",
+            "probability": 0.011705703102052212
+          },
+          {
+            "class": "deer",
+            "probability": 0.010267558507621288
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "horse",
+            "probability": 0.9111603498458862
+          },
+          {
+            "class": "automobile",
+            "probability": 0.01121462695300579
+          },
+          {
+            "class": "airplane",
+            "probability": 0.01074511744081974
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "horse",
+            "probability": 0.9112478494644165
+          },
+          {
+            "class": "airplane",
+            "probability": 0.01036632340401411
+          },
+          {
+            "class": "deer",
+            "probability": 0.01010911911725998
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "horse",
+            "probability": 0.9046162962913513
+          },
+          {
+            "class": "automobile",
+            "probability": 0.01114791538566351
+          },
+          {
+            "class": "cat",
+            "probability": 0.011088495142757893
+          }
+        ]
+      }
+    },
+    {
+      "label": "ship",
+      "file": "results/web_image_qualitative/images/ship.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=106523094",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "ship",
+            "probability": 0.9095360040664673
+          },
+          {
+            "class": "airplane",
+            "probability": 0.010894553735852242
+          },
+          {
+            "class": "cat",
+            "probability": 0.010283732786774635
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "ship",
+            "probability": 0.9137973189353943
+          },
+          {
+            "class": "airplane",
+            "probability": 0.011245795525610447
+          },
+          {
+            "class": "deer",
+            "probability": 0.009897686541080475
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "ship",
+            "probability": 0.7956392765045166
+          },
+          {
+            "class": "airplane",
+            "probability": 0.08386128395795822
+          },
+          {
+            "class": "frog",
+            "probability": 0.016700640320777893
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "ship",
+            "probability": 0.9114325046539307
+          },
+          {
+            "class": "airplane",
+            "probability": 0.012711646035313606
+          },
+          {
+            "class": "horse",
+            "probability": 0.010119400918483734
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "ship",
+            "probability": 0.8960432410240173
+          },
+          {
+            "class": "airplane",
+            "probability": 0.028617605566978455
+          },
+          {
+            "class": "cat",
+            "probability": 0.010962004773318768
+          }
+        ]
+      }
+    },
+    {
+      "label": "truck",
+      "file": "results/web_image_qualitative/images/truck.jpg",
+      "source_page": "https://commons.wikimedia.org/?curid=27799928",
+      "license": "CC BY-SA 4.0",
+      "predictions": {
+        "Teacher ResNet34": [
+          {
+            "class": "truck",
+            "probability": 0.9102197289466858
+          },
+          {
+            "class": "airplane",
+            "probability": 0.011748877353966236
+          },
+          {
+            "class": "dog",
+            "probability": 0.011216097511351109
+          }
+        ],
+        "FP32 ResNet18": [
+          {
+            "class": "airplane",
+            "probability": 0.40250682830810547
+          },
+          {
+            "class": "truck",
+            "probability": 0.2819698750972748
+          },
+          {
+            "class": "ship",
+            "probability": 0.06895369291305542
+          }
+        ],
+        "Ternary ResNet18 no KD": [
+          {
+            "class": "dog",
+            "probability": 0.4356822073459625
+          },
+          {
+            "class": "airplane",
+            "probability": 0.232188418507576
+          },
+          {
+            "class": "bird",
+            "probability": 0.06934453547000885
+          }
+        ],
+        "Vanilla ternary KD control": [
+          {
+            "class": "dog",
+            "probability": 0.6657965183258057
+          },
+          {
+            "class": "truck",
+            "probability": 0.07922382652759552
+          },
+          {
+            "class": "ship",
+            "probability": 0.0659497082233429
+          }
+        ],
+        "QTRD exploratory": [
+          {
+            "class": "truck",
+            "probability": 0.3183361887931824
+          },
+          {
+            "class": "dog",
+            "probability": 0.22891171276569366
+          },
+          {
+            "class": "airplane",
+            "probability": 0.10953817516565323
+          }
+        ]
+      }
+    }
+  ]
+}

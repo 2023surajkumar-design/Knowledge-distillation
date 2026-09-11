@@ -1,0 +1,117 @@
+{
+  "purpose": "qualitative external web-image robustness check; not a benchmark",
+  "source_platform": "Wikimedia Commons API",
+  "downloaded_at": "2026-09-11T11:09:22Z",
+  "images": [
+    {
+      "label": "airplane",
+      "query": "airplane flying",
+      "file": "results/web_image_qualitative/images/airplane.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=180160048",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/%22Inf%C3%A2ncia%22_sculpture_%28Samuel_Torres_de_Carvalho%2C_1993%29_with_an_airplane_flying_overhead%2C_Jardim_M%C3%A1rio_Soares%2C_Lisbon%2C_Portugal_julesvernex2.jpg/960px-%22Inf%C3%A2ncia%22_sculpture_%28Samuel_Torres_de_Carvalho%2C_1993%29_with_an_airplane_flying_overhead%2C_Jardim_M%C3%A1rio_Soares%2C_Lisbon%2C_Portugal_julesvernex2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:\"Inf\u00e2ncia\" sculpture (Samuel Torres de Carvalho, 1993) with an airplane flying overhead, Jardim M\u00e1rio Soares, Lisbon, Portugal julesvernex2.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Julesvernex2\" title=\"User:Julesvernex2\">Jules Verne Times Two</a>",
+      "credit": "<ul><li>Own work</li>\n<li><a rel=\"nofollow\" class=\"external free\" href=\"https://julesvernex2.com\">https://julesvernex2.com</a></li></ul>"
+    },
+    {
+      "label": "automobile",
+      "query": "automobile car",
+      "file": "results/web_image_qualitative/images/automobile.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=17226541",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/A_Brouhot_car_in_Paris%2C_1910.jpg/960px-A_Brouhot_car_in_Paris%2C_1910.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:A Brouhot car in Paris, 1910.jpg",
+      "license": "Public domain",
+      "artist": "Alexandre Louis",
+      "credit": "Album de photo de Marcel Louis"
+    },
+    {
+      "label": "bird",
+      "query": "bird",
+      "file": "results/web_image_qualitative/images/bird.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=64634352",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Asian_pied_starlings_%28Gracupica_contra%29.jpg/960px-Asian_pied_starlings_%28Gracupica_contra%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:Asian pied starlings (Gracupica contra).jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<bdi><a href=\"https://www.wikidata.org/wiki/Q54800218\" class=\"extiw\" title=\"d:Q54800218\"><span title=\"Scottish wildlife photographer\">Charles J. Sharp</span></a></bdi>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://www.sharpphotography.co.uk/\">Sharp Photography, sharpphotography.co.uk</a>"
+    },
+    {
+      "label": "cat",
+      "query": "cat",
+      "file": "results/web_image_qualitative/images/cat.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=141562823",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/20231125_housecat_south_meadows_PD100306.jpg/960px-20231125_housecat_south_meadows_PD100306.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:20231125 housecat south meadows PD100306.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Pdanese\" title=\"User:Pdanese\">Paul Danese</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "deer",
+      "query": "deer",
+      "file": "results/web_image_qualitative/images/deer.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=120575235",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/014_Wild_Red_Deer_Switzerland_Photo_by_Giles_Laurent.jpg/960px-014_Wild_Red_Deer_Switzerland_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:014 Wild Red Deer Switzerland Photo by Giles Laurent.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Giles_Laurent\" title=\"User:Giles Laurent\">Giles Laurent</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>, from <a rel=\"nofollow\" class=\"external text\" href=\"https://gileslaurent.com\">gileslaurent.com</a>"
+    },
+    {
+      "label": "dog",
+      "query": "dog",
+      "file": "results/web_image_qualitative/images/dog.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=15170790",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/20110425_German_Shepherd_Dog_8505.jpg/960px-20110425_German_Shepherd_Dog_8505.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:20110425 German Shepherd Dog 8505.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Jakubhal\" title=\"User:Jakubhal\">Jakub Ha\u0142un</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "frog",
+      "query": "frog",
+      "file": "results/web_image_qualitative/images/frog.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=63042749",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Agile_frog_%28Rana_dalmatina%29.jpg/960px-Agile_frog_%28Rana_dalmatina%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:Agile frog (Rana dalmatina).jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:PetarM\" title=\"User:PetarM\">Petar Milo\u0161evi\u0107</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "horse",
+      "query": "horse",
+      "file": "results/web_image_qualitative/images/horse.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=35770",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/04-09-12-Schaupfl%C3%BCgen-Fahrenwalde-RalfR-IMG_1232.jpg/960px-04-09-12-Schaupfl%C3%BCgen-Fahrenwalde-RalfR-IMG_1232.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:04-09-12-Schaupfl\u00fcgen-Fahrenwalde-RalfR-IMG 1232.jpg",
+      "license": "CC BY-SA 2.5",
+      "artist": "<bdi><a href=\"https://www.wikidata.org/wiki/Q15080600\" class=\"extiw\" title=\"d:Q15080600\"><span title=\"German civil engineer and photographer\">Ralf Roletschek</span></a></bdi>",
+      "credit": "<div style=\"display:table;width:auto;vertical-align:middle;direction:ltr;float:left;line-height:22px;height:24px;font-size:.96em;margin:0px;padding:2px 4px 2px 6px;color:var(--color-base,#000);background:var(--background-color-neutral-subtle,#F8F9FA);border:1px solid #BAB;border-collapse:separate;border-spacing:0px;\"><span typeof=\"mw:File\"><a href=\"//commons.wikimedia.org/wiki/File:Applets-screenshooter.svg\" class=\"mw-file-description\"><img src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Applets-screenshooter.svg/40px-Applets-screenshooter.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"22\" height=\"22\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Applets-screenshooter.svg/60px-Applets-screenshooter.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"64\" data-file-height=\"64\"></a></span>\u00a0This <a href=\"https://en.wikipedia.org/wiki/photo\" class=\"extiw\" title=\"w:photo\">photo</a> was taken with Canon PowerShot G5</div> Transferred from the <a href=\"https://de.wikipedia.org/wiki/Wikipedia\" class=\"extiw\" title=\"de:Wikipedia\">de:Wp</a>. Original file is/was <span style=\"border:1px dotted #FC0;padding:0 4px\"><a href=\"https://de.wikipedia.org/wiki/File:Einscharpflug.jpg\" class=\"extiw\" title=\"de:File:Einscharpflug.jpg\">here</a></span>. (<a href=\"#Original_upload_log\">Original upload log</a> available below.)"
+    },
+    {
+      "label": "ship",
+      "query": "ship vessel",
+      "file": "results/web_image_qualitative/images/ship.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=106523094",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/2015-09-18_MS_OCEAN_ENDEAVOUR_-_IMO_7625811%2C_at_Qeqertarsuaq_Island_%28Karrat_Fjord%29%2C_Greenland.jpg/960px-2015-09-18_MS_OCEAN_ENDEAVOUR_-_IMO_7625811%2C_at_Qeqertarsuaq_Island_%28Karrat_Fjord%29%2C_Greenland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:2015-09-18 MS OCEAN ENDEAVOUR - IMO 7625811, at Qeqertarsuaq Island (Karrat Fjord), Greenland.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:GRDN711\" title=\"User:GRDN711\">Gordon Leggett</a>",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    },
+    {
+      "label": "truck",
+      "query": "truck",
+      "file": "results/web_image_qualitative/images/truck.jpg",
+      "commons_page": "https://commons.wikimedia.org/?curid=27799928",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/13-07-13_ADAC_Truck_GP_03.jpg/960px-13-07-13_ADAC_Truck_GP_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "title": "File:13-07-13 ADAC Truck GP 03.jpg",
+      "license": "CC BY-SA 4.0",
+      "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Achim_Raschka\" title=\"User:Achim Raschka\">Achim Raschka</a> (<a href=\"//commons.wikimedia.org/wiki/User_talk:Achim_Raschka\" title=\"User talk:Achim Raschka\"><span class=\"signature-talk\">talk</span></a>)",
+      "credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>"
+    }
+  ]
+}
