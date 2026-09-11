@@ -28,7 +28,8 @@ if str(REPO_ROOT) not in sys.path:
 from src.data import CIFAR10_MEAN, CIFAR10_STD, get_train_val_loaders, split_manifest
 from src.evaluation.verify_ternary import build_from_checkpoint, verify_model
 from src.kd.losses import (attention_transfer_loss, decoupled_kd_loss, dist_loss,
-                           quantized_feature_loss, relational_distance_loss, vanilla_kd_loss, _with_auxiliary)
+                           quantized_feature_loss, quantized_relational_loss, relational_distance_loss,
+                           vanilla_kd_loss, _with_auxiliary)
 from src.kd.teacher import assert_teacher_frozen, load_frozen_teacher
 from src.models.resnet_cifar import resnet18_cifar
 from src.quant.ternary import QuantConfig, TernaryConv2d, TernaryLinear, convert_to_ternary, parameter_group_audit, ternary_parameter_groups
@@ -37,7 +38,7 @@ from src.training.utils import evaluate, get_device, make_warmup_cosine, runtime
 
 def parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Task 4 vanilla logit-KD + strict ternary QAT.")
-    p.add_argument("--kd-mode", choices=["vanilla", "dkd", "dist", "qfd", "at", "rkd"], default="vanilla")
+    p.add_argument("--kd-mode", choices=["vanilla", "dkd", "dist", "qfd", "qtrd", "at", "rkd"], default="vanilla")
     p.add_argument("--dkd-alpha", type=float); p.add_argument("--dkd-beta", type=float)
     p.add_argument("--config", default="configs/kd/resnet18_ternary_vanillaKD.yaml")
     p.add_argument("--run-name"); p.add_argument("--condition")
@@ -149,6 +150,8 @@ def _distill(mode, student_logits, teacher_logits, labels, temperature, kd_lambd
     base = vanilla_kd_loss(student_logits, teacher_logits, labels, temperature, kd_lambda, criterion)
     if mode == "qfd":
         return _with_auxiliary(base, quantized_feature_loss(student_features["f4"], teacher_features["f4"]), beta)
+    if mode == "qtrd":
+        return _with_auxiliary(base, quantized_relational_loss(student_features["f4"], teacher_features["f4"]), beta)
     if mode == "at":
         return _with_auxiliary(base, attention_transfer_loss(student_features["f4"], teacher_features["f4"]), beta)
     if mode == "rkd":
@@ -164,10 +167,10 @@ def train_epoch(student, teacher, loader, optimizer, device, temperature, kd_lam
     for batch_index, (inputs, labels) in enumerate(tqdm(loader, desc=description, leave=False)):
         inputs, labels = inputs.to(device, non_blocking=True), labels.to(device, non_blocking=True)
         with torch.no_grad():
-            teacher_output = teacher(inputs, return_features=mode in {"qfd", "at", "rkd"})
+            teacher_output = teacher(inputs, return_features=mode in {"qfd", "qtrd", "at", "rkd"})
             teacher_logits, teacher_features = teacher_output if isinstance(teacher_output, tuple) else (teacher_output, None)
         optimizer.zero_grad(set_to_none=True)
-        student_output = student(inputs, return_features=mode in {"qfd", "at", "rkd"})
+        student_output = student(inputs, return_features=mode in {"qfd", "qtrd", "at", "rkd"})
         student_logits, student_features = student_output if isinstance(student_output, tuple) else (student_output, None)
         losses = _distill(mode, student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta, student_features, teacher_features)
         if not torch.isfinite(losses.total):
@@ -200,9 +203,9 @@ def validation_diagnostics(student, teacher, loader, criterion, device, temperat
     count = 0
     for inputs, labels in loader:
         inputs, labels = inputs.to(device, non_blocking=True), labels.to(device, non_blocking=True)
-        teacher_output = teacher(inputs, return_features=mode in {"qfd", "at", "rkd"})
+        teacher_output = teacher(inputs, return_features=mode in {"qfd", "qtrd", "at", "rkd"})
         teacher_logits, teacher_features = teacher_output if isinstance(teacher_output, tuple) else (teacher_output, None)
-        student_output = student(inputs, return_features=mode in {"qfd", "at", "rkd"})
+        student_output = student(inputs, return_features=mode in {"qfd", "qtrd", "at", "rkd"})
         student_logits, student_features = student_output if isinstance(student_output, tuple) else (student_output, None)
         losses = _distill(mode, student_logits, teacher_logits, labels, temperature, kd_lambda, criterion, alpha, beta, student_features, teacher_features)
         teacher_prob = torch.softmax(teacher_logits, dim=1); student_prob = torch.softmax(student_logits, dim=1)

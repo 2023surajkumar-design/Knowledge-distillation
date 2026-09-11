@@ -1,0 +1,13 @@
+{
+  "official_report": "results/final_official_test_evaluation.json",
+  "plots": [
+    "plots/final_official/compression_and_sparsity.png",
+    "plots/final_official/kd_temperature_lambda_ablation.png",
+    "plots/final_official/official_test_confusion_teacher_vs_kd.png",
+    "plots/final_official/teacher_student_pre_post_kd_curves.png",
+    "plots/final_official/validation_vs_official_test.png",
+    "plots/final_official/vanilla_kd_stability_diagnostics.png"
+  ],
+  "final_control_checkpoint": "experiments/task4/checkpoints/task4_b3_final_t2_lam09_remaining_rerun1/resnet18_ternary_kd_seed44.pth",
+  "test_protocol": "All models/checkpoints were frozen before first test access; no test-based model selection or tuning occurred."
+}

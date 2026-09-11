@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-11T13:19:34.856988+05:30",
-  "run_mode": "FINAL_NOTEBOOK_ONE_SEED_SCREENS",
+  "timestamp": "2026-09-11T16:29:14.971465+05:30",
+  "run_mode": "FINAL_TWO_VALIDATION_ONLY_QTRD_SCREEN",
   "completed_tasks": [
     "Task 1",
     "Task 2",
@@ -34,8 +34,8 @@
   "active_training": null,
   "automl_status": "PAUSED_NOT_ABANDONED",
   "research_ledger": "research_db/experiments.jsonl",
-  "test_evaluation": "LOCKED_NOT_RUN",
-  "next_experiment_after_completion": "Review one-seed QFD/AT/RKD evidence; do not promote a screen to final without independent confirmation.",
+  "test_evaluation": "COMPLETED_FINAL_REPORTING_ONLY",
+  "next_experiment_after_completion": "Review QTRD validation evidence; keep the official test set locked.",
   "dkd_shortlist": {
     "candidate": {
       "43": 0.9468,
@@ -49,7 +49,7 @@
     "threshold": 0.002,
     "decision": "REJECT_FINAL_CANDIDATE"
   },
-  "final_method": "vanilla KD (Task 4 control)",
+  "final_method": "vanilla KD (Task 4 control; frozen before official test evaluation)",
   "final_summary": "report/final/final_comparison.json",
   "final_validation_mean": 0.9512,
   "final_validation_std": 0.00151,
@@ -72,7 +72,7 @@
     "official_test": "LOCKED_NOT_RUN",
     "next_step": "Resume deep research with a separately reviewed one-seed experiment."
   },
-  "notebook": "final.ipynb",
+  "notebook": "final-two.ipynb",
   "methods_executed": [
     "Task 3",
     "vanilla Task 4",
@@ -140,5 +140,16 @@
     }
   },
   "final_notebook_best_screen": "rkd",
-  "final_notebook_decision": "Task-4 vanilla KD remains final control unless a separately authorized confirmation is run."
+  "final_notebook_decision": "Task-4 vanilla KD remains final control unless a separately authorized confirmation is run.",
+  "final_two_qtrd_screen": {
+    "validation_mean": 0.9506,
+    "validation_best": 0.9506,
+    "summary": "results/task4/task11_qtrd_finaltwo_screen_t2_lam09_aux1_r1_summary.json",
+    "status": "one_seed_provisional",
+    "smoke_summary": "results/task4/task11_qtrd_finaltwo_smoke_r1_summary.json"
+  },
+  "final_two_decision": "Task-4 vanilla KD remains the final control unless a separately authorized independent confirmation promotes a challenger.",
+  "official_final_evaluation": "results/final_official_test_evaluation.json",
+  "authoritative_final_report": "output/pdf/ATDL_comprehensive_final_report.pdf",
+  "official_test_selection_policy": "All models/checkpoints were frozen before first test access; no test-based model selection or tuning occurred."
 }

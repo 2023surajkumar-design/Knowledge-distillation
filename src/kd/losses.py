@@ -117,6 +117,11 @@ def quantized_feature_loss(student_feature: torch.Tensor, teacher_feature: torch
     return F.mse_loss(F.normalize(student_feature.flatten(1), dim=1), F.normalize(target.flatten(1), dim=1))
 
 
+def quantized_relational_loss(student_feature: torch.Tensor, teacher_feature: torch.Tensor) -> torch.Tensor:
+    """QTRD screen: preserve geometry of a frozen ternarized teacher feature."""
+    return relational_distance_loss(student_feature, ternarized_feature_target(teacher_feature))
+
+
 def vanilla_kd_loss(
     student_logits: torch.Tensor,
     teacher_logits: torch.Tensor,

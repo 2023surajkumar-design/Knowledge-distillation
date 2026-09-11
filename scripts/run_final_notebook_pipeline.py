@@ -14,6 +14,7 @@ STAGES = (
     ("qfd", "configs/kd/resnet18_ternary_qfd_screen.yaml", "task8_qfd_smoke_r1", "T6-QFD-smoke", "task8_qfd_screen_t2_lam09_aux1_r1"),
     ("at", "configs/kd/resnet18_ternary_at_screen.yaml", "task9_at_smoke_r1", "T7-AT-smoke", "task9_at_screen_t2_lam09_aux1_r1"),
     ("rkd", "configs/kd/resnet18_ternary_rkd_screen.yaml", "task10_rkd_smoke_r1", "T8-RKD-smoke", "task10_rkd_screen_t2_lam09_aux1_r1"),
+    ("qtrd", "configs/kd/resnet18_ternary_qtrd_screen.yaml", "task11_qtrd_smoke_r1", "T6-QTRD-smoke", "task11_qtrd_screen_t2_lam09_aux1_r1"),
 )
 
 def summary(run: str) -> Path:
