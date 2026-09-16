@@ -2,6 +2,9 @@
 data/cifar-10-python.tar.gz
 *.pth
 
+# Raw external DFKD downloads are reproducibly fetched by the pipeline.
+dfkd_ood_2026/external/
+
 # Derived Python/runtime caches
 __pycache__/
 *.py[cod]

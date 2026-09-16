@@ -1,0 +1,47 @@
+{
+  "name": "gaussian_balanced_baseline",
+  "epochs": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "train_kd_loss": 1.4719987630844116,
+      "train_agreement": 0.2028985507246377,
+      "transfer_holdout_kd_loss": 0.8356217741966248,
+      "transfer_holdout_agreement": 0.0,
+      "lr": 0.08
+    },
+    {
+      "epoch": 2,
+      "train_kd_loss": 0.791223472788714,
+      "train_agreement": 0.3710144927536232,
+      "transfer_holdout_kd_loss": 0.5812215805053711,
+      "transfer_holdout_agreement": 0.0,
+      "lr": 0.0723606797749979
+    },
+    {
+      "epoch": 3,
+      "train_kd_loss": 0.5158918161323105,
+      "train_agreement": 0.3710144927536232,
+      "transfer_holdout_kd_loss": 0.42665374279022217,
+      "transfer_holdout_agreement": 0.0,
+      "lr": 0.05236067977499789
+    },
+    {
+      "epoch": 4,
+      "train_kd_loss": 0.5045114249422931,
+      "train_agreement": 0.3710144927536232,
+      "transfer_holdout_kd_loss": 0.3515269458293915,
+      "transfer_holdout_agreement": 0.0,
+      "lr": 0.027639320225002102
+    },
+    {
+      "epoch": 5,
+      "train_kd_loss": 0.5035951317220494,
+      "train_agreement": 0.3710144927536232,
+      "transfer_holdout_kd_loss": 0.3234271705150604,
+      "transfer_holdout_agreement": 0.0,
+      "lr": 0.007639320225002105
+    }
+  ],
+  "selection": "minimum held-out transfer KD loss; no target data"
+}
